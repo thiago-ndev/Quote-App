@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>teste</title>
+</head>
+<body>
+    <h1>  </h1>
+
+<div id="outer">
+  <div id="inner">
+    <button id="button">Clique aqui</button>
+  </div>
+</div>
+
+</body>
+
+<script>
+    let pessoas = ['joão', 'maria', 'jose']
+
+    pessoas.forEach((ValorAtual, Indice, ArrayCompleto) => {
+        console.log(ValorAtual, Indice, ArrayCompleto );
+        })
+
+
+    let produtos = [
+        {
+            NomeProduto: 'monitor',
+            PrecoProduto: 500,
+            QuantidadeProduto: 5,
+        },
+        {
+            NomeProduto: 'celular',
+            PrecoProduto: 150,
+            QuantidadeProduto: 3
+        },
+        {
+            NomeProduto: 'notebook',
+            PrecoProduto: 2000,
+            QuantidadeProduto: 1
+        }
+    ];
+
+    produtos.forEach((produtoAtual)=> {
+        console.log(produtoAtual.NomeProduto, produtoAtual.PrecoProduto, produtoAtual.QuantidadeProduto);
+    })
+    document.getElementById("outer").addEventListener("click", function(event) {
+  console.log("event.target:", event.target.id);
+  console.log("event.currentTarget:", event.currentTarget.id);
+});
+
+document.getElementById("inner").addEventListener("click", function(event) {
+  console.log("event.target:", event.target.id);
+  console.log("event.currentTarget:", event.currentTarget.id);
+});
+
+document.getElementById("button").addEventListener("click", function(event) {
+  console.log("event.target:", event.target.id);
+  console.log("event.currentTarget:", event.currentTarget.id);
+});
+
+
+</script>
+</html>

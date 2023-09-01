@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SignIn | Mind </title>
+    <link rel="shortcut icon" href="https://mindinc.com.br/wp-content/uploads/2023/07/cropped-Anexo-01-Logo-Aba-32x32.png" />
+    <link href="{% static 'assets/css/loader_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/loader_dark.css'%}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'assets/js/loader.js'%}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/plugins_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/auth/auth-cover_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/perfect-scrollbar.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/auth/auth-cover_dark.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/auth/auth-loopt.css'%}" rel="stylesheet" type="text/css" />
+</head>
+<body class="form">
+
+<!-- BEGIN LOADER -->
+<div id="load_screen"> <div class="loader"> <div class="loader-content">
+    <div class="container-spinner align-self-center">
+        <img src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" style="width: 100%;">
+    </div>
+</div></div></div>
+<!--  END LOADER -->
+
+<div class="auth-container d-flex">
+    <div class="container mx-auto align-self-center">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 d-lg-flex d-none h-100 my-auto top-0 start-0 text-center justify-content-center flex-column">
+                <div class="auth-cover-bg-image"></div>
+                <div class="auth-overlay">
+                    <div class="auth-cover">
+                        <div class="position-relative" style="display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column;">
+                            <img src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" style="width: 100%;">
+                            <h2 class="text-white font-weight-bolder px-2">Revolucione suas estruturas com derivativos</h2>
+                            <p class="text-white px-2">Simplifique sua rotina e otimize seus resultados com a nossa plataforma de cotação.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-10 col-12 d-flex flex-column align-self-center ms-lg-auto me-lg-0 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <h2>Sign In Mind</h2>
+                                <p>Insira seu email e senha para acessar.</p>
+                            </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input required type="email" name="email" id="email" class="form-control">
+                                        <div id="errorMessage" class="text-warning" style="height: 20px;padding: 5px;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-4">
+                                        <label required class="form-label">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control">
+                                        {% if error %}
+                                            <div style="background-color: #ffb6c1; margin-top: 10px; padding: 10px; border-radius: 5px; text-align: center; color: #dc143c;">
+                                                Incorrect email or password.
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <div class="form-check-primary form-check-inline">
+                                            <a href="javascript:void(0);" id="eye-on" style="cursor:pointer;display:none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+                                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                </svg>
+                                            </a>
+                                            <a href="javascript:void(0);" id="eye-off" style="cursor:pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye-off">
+                                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                                </svg>
+                                                <label class="form-check-label" for="form-check-default"></label>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <a href="/conf_code" class="text-warning" style="color: #0251D3 !important;">Esqueceu sua senha?</a>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-4">
+                                        <button class="btn btn-secondary w-100" type="submit" style="background-image: linear-gradient(90deg,#000a6a 0,#5fddf0 100%) !important;">SIGN IN</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <p class="mb-0">Primeiro acesso? <a href="/change_password" class="text-warning" style="color: #0251D3 !important;">Troque sua senha temporária</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+<script src="{% static 'assets/js/auth/form-1.js' %}"></script>
+<script src="{% static 'assets/js/unallowResend.js' %}"></script>
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+</body>
+</html>

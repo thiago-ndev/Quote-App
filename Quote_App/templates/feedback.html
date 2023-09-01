@@ -1,0 +1,342 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7845F8NFKR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7845F8NFKR');
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Feedback|LOOPT </title>
+    <link rel="shortcut icon" href="{% static 'assets/img/LOOPT12.png'%}" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/authentication/form-1.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/forms/theme-checkbox-radio.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/forms/switches.css' %}">
+</head>
+{% if request.session.group %}
+<div class="header-container fixed-top">
+    <header class="header navbar navbar-expand-sm">
+
+        <ul class="navbar-item theme-brand flex-row  text-center">
+            <li class="nav-item theme-logo">
+                <a href="">
+                    <img src="{% static 'assets/img/LOOPT.png'%}" class="navbar-logo" alt="logo">
+                </a>
+            </li>
+            <li class="nav-item theme-text">
+                <a  class="nav-link"> LOOPT </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-item flex-row ml-md-auto">
+          {% if "Key-users" in request.session.group %}
+
+            <li class="nav-item dropdown user-profile-dropdown">
+                <a href="/OBookings/score/" class="nav-link dropdown-toggle user" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </a>
+            </li>
+          {% elif "Loopt-users" in request.session.group %} 
+            <li class="nav-item dropdown user-profile-dropdown">
+              <a href="/forecast/painel/" class="nav-link dropdown-toggle user" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </a>
+            </li>
+          {% elif "Capacity-users" in request.session.group %}
+            <li class="nav-item dropdown user-profile-dropdown">
+              <a href="/forecast/painel/" class="nav-link dropdown-toggle user" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </a>
+            </li>
+          {% elif "Sales-users" in request.session.group %}
+            <li class="nav-item dropdown user-profile-dropdown">
+              <a href="/sales/painel/" class="nav-link dropdown-toggle user" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </a>
+            </li>
+          {% elif "CX-users" in request.session.group %}  
+            <li class="nav-item dropdown user-profile-dropdown">
+              <a href="/CX/prontidao/" class="nav-link dropdown-toggle user" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </a>
+            </li>
+          {% else %}  
+            <li class="nav-item dropdown user-profile-dropdown">
+              <a href="/logout" class="nav-link dropdown-toggle user" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </a>
+            </li>
+          {% endif %}  
+
+            <!-- Area do usuario com sing out-->
+            <li class="nav-item dropdown user-profile-dropdown">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <!--<img src="{% static 'assets/img/90x90.jpg' %}" alt="avatar">-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="Silver" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </a>
+                <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                    <div class="">
+                        <div class="dropdown-item">  
+                            <a class="" href="/logout" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </header>
+</div>
+
+<body class="form">
+    <div class="form-container " style="display: flex;">
+        <p></p>
+        <p></p>
+        <div class="form-form imagem-fundo" style="margin-top:60px">
+            <div class="form-form-wrap " >
+
+               
+                <div class="form-content " style="margin-top: 20%;">
+                    <h1 class="" >Feedback <a ><span class="brand-name">LOOPT</span></a></h1>
+                    {% if messages  %}
+                    <div class="container justify-content-center">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} col-s12 mtop50 alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}                       
+                    <form class="form-signin" action="submit" method="POST" style="margin-top: 40px" autocomplete="off" >
+                        {% csrf_token %}
+                          <div class="form" >
+                            
+                            <label class="rating-label"><strong>Nota Plataforma </strong>
+                                <input
+                                style="background-color: transparent !important;"
+                                name="rating"
+                                class="rating rating--nojs"
+                                max="5"
+                                step="1"
+                                type="range"
+                                value="5">
+                            
+                    
+                            <div  class="field-wrapper input mb-2">
+                                <div class="md-form ">
+                                    <textarea style="    min-height: 150px;
+                                    border-radius: 25px;
+                                    padding: 12px 30px;
+                                    box-shadow:  7px 2px 15px #1b55e2;" name="description" placeholder="Observações e ideias..." type="text" class="md-textarea form-control" rows="3"></textarea>
+                                </div>
+                                <div class="invalid">
+                                  {{ form.description.errors}}
+                                </div>
+                            </div>
+                            
+                    
+                            
+                            <div class="d-sm-flex justify-content-between center">
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <div class="buttons-section d-flex justify-content-center">
+                                    <button type="submit" id="submit_btn" class="btn btn-primary  mb-4 mr-2 btn-lg">  Enviar  </button>
+                                </div> 
+                            </div>
+                          </div>
+                    </form>     
+                </div>                    
+              
+                <div class="footer-wrapper">
+                  <div class="footer-section f-section-1">
+                      <p class="">Copyright © {% now 'Y' %} <a target="_blank" href="https://www.loopt.com.br">HeineGutierres</a>, All rights reserved.</p>
+                  </div>
+                  <p></p>
+                  <p></p>
+                </div>
+            </div>
+        </div>
+<!-- Imagem Lateral-->
+        <div class="form-image imagem-fundo" style="margin-right: 0px;">
+          <img src="{% static 'assets/img/imagem_feedback.png'%}" style="width: 100%; height: 100%;">
+        </div>
+        
+    </div>
+
+    
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'assets/js/libs/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'assets/js/authentication/form-1.js' %}"></script>
+{% endif %}    
+
+    </body>
+    <style>
+      .rating {
+        --dir: right;
+        --fill: #1b55e2;
+        --fillbg: rgba(100, 100, 100, 0.15);
+        --heart: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.328l-1.453-1.313q-2.484-2.25-3.609-3.328t-2.508-2.672-1.898-2.883-0.516-2.648q0-2.297 1.57-3.891t3.914-1.594q2.719 0 4.5 2.109 1.781-2.109 4.5-2.109 2.344 0 3.914 1.594t1.57 3.891q0 1.828-1.219 3.797t-2.648 3.422-4.664 4.359z"/></svg>');
+        --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+        --stars: 5;
+        --starsize: 2rem;
+        --symbol: var(--star);
+        --value: 1;
+        --w: calc(var(--stars) * var(--starsize));
+        --x: calc(100% * (var(--value) / var(--stars)));
+        block-size: var(--starsize);
+        inline-size: var(--w);
+        position: relative;
+        touch-action: manipulation;
+        -webkit-appearance: none;
+      }
+      [dir="rtl"] .rating {
+        --dir: left;
+      }
+      .rating::-moz-range-track {
+        background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--symbol);
+      }
+      .rating::-webkit-slider-runnable-track {
+        background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--symbol);
+        -webkit-mask: repeat left center/var(--starsize) var(--symbol);
+      }
+      .rating::-moz-range-thumb {
+        height: var(--starsize);
+        opacity: 0;
+        width: var(--starsize);
+      }
+      .rating::-webkit-slider-thumb {
+        height: var(--starsize);
+        opacity: 0;
+        width: var(--starsize);
+        -webkit-appearance: none;
+      }
+      .rating, .rating-label {
+        display: block;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .rating-label {
+        margin-block-end: 1rem;
+      }
+      
+      /* NO JS */
+      .rating--nojs::-moz-range-track {
+        background: var(--fillbg);
+      }
+      .rating--nojs::-moz-range-progress {
+        background: var(--fill);
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--star);
+      }
+      .rating--nojs::-webkit-slider-runnable-track {
+        background: var(--fillbg);
+      }
+      .rating--nojs::-webkit-slider-thumb {
+        background-color: rgba(100, 100, 100, 0.15);;
+        box-shadow: calc(0rem - var(--w)) 0 0 var(--w) var(--fill);
+        opacity: 1;
+        width: 1px;
+      }
+      [dir="rtl"] .rating--nojs::-webkit-slider-thumb {
+        box-shadow: var(--w) 0 0 var(--w) var(--fill);
+      }
+      .active-pink-textarea.md-form label.active {
+        color: #f48fb1;
+      }
+      .pink-textarea textarea.md-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #f48fb1;
+        box-shadow: 0 1px 0 0 #f48fb1;
+      }
+      .pink-textarea.md-form .prefix.active {
+        color: #f48fb1;
+      }
+      .active-pink-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+        color: #f48fb1;
+      }
+
+      .active-amber-textarea.md-form label.active {
+        color: #ffa000;
+      }
+      .amber-textarea textarea.md-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #ffa000;
+        box-shadow: 0 1px 0 0 #ffa000;
+      }
+      .amber-textarea.md-form .prefix.active {
+        color: #ffa000;
+      }
+      .active-amber-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+        color: #ffa000;
+      }
+
+      .active-pink-textarea-2 textarea.md-textarea {
+        border-bottom: 1px solid #f48fb1;
+        box-shadow: 0 1px 0 0 #f48fb1;
+      }
+      .active-pink-textarea-2.md-form label.active {
+        color: #f48fb1;
+      }
+      .active-pink-textarea-2.md-form label {
+        color: #f48fb1;
+      }
+      .active-pink-textarea-2.md-form .prefix {
+        color: #f48fb1;
+      }
+      .active-pink-textarea-2.md-form textarea.md-textarea:focus:not([readonly])+label {
+        color: #f48fb1;
+      }
+
+      .active-amber-textarea-2 textarea.md-textarea {
+        border-bottom: 1px solid #ffa000;
+        box-shadow: 0 1px 0 0 #ffa000;
+      }
+      .active-amber-textarea-2.md-form label.active {
+        color: #ffa000;
+      }
+      .active-amber-textarea-2.md-form label {
+        color: #ffa000;
+      }
+      .active-amber-textarea-2.md-form .prefix {
+        color: #ffa000;
+      }
+      .active-amber-textarea-2.md-form textarea.md-textarea:focus:not([readonly])+label {
+        color: #ffa000;
+        }
+    </style>
+    <style>
+      .imagem-fundo{
+          background-image: url("{% static 'assets/img/imagem_fundo.png'%}"); 
+          background-size: 100%;
+          border-radius: 0px;
+          height: 100%;   
+          padding-right: 0px;
+          margin-right: 0px;
+          background-repeat: repeat;
+      }
+    </style>
+    <script>const btn = document.querySelector(".submit-rating");
+        const thanksmsg = document.querySelector(".thanks-msg");
+        const starRating = document.querySelector(".star-input");
+        // Success msg show/hide
+        btn.onclick = () => {
+            starRating.style.display = "none";
+            thanksmsg.style.display = "table";
+            return false;
+        };
+    </script>
+</html>

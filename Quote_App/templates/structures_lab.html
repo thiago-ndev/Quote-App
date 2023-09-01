@@ -1,0 +1,1067 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Mind | Montagem de Estruturas </title>
+    <link href="{% static 'assets/css/loader_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/loader_dark.css'%}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'assets/js/loader.js'%}"></script>
+    <style>
+
+        .back-home-button {
+            background-color: transparent; /* Cor de fundo */
+            color: black; /* Cor do texto */
+            padding: 12px 20px; /* Espaçamento interno */
+            border: none; /* Sem borda */
+            cursor: pointer; /* Cursor de mãozinha */
+            font-size: 16px; /* Tamanho da fonte */
+            margin: 10px 0; /* Margem */
+            position: fixed; /* Fixa na tela */
+        top: 10px; /* Distância do topo */
+        left: 80px; /* Distância da esquerda */
+        z-index: 999; /* z-index máximo */
+  }
+    </style>
+    <!-- /ENABLE LOADERS -->
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/structure_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/main_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/perfect-scrollbar.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link href="{% static 'assets/css/knowledge_base.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/invoice-preview.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/modal.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/tabs.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-autoComplete.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-clipboard.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/monokai-sublime.css'%}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'assets/css/plugins_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-fullcalendar-light.css'%}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{% static 'assets/css/custom-fullcalendar-dark.css'%}" rel="stylesheet" type="text/css" /> -->
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    
+    <link href="{% static 'assets/css/crud_check.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+      ::selection {
+  background-color: transparent;
+  color: #1b55e2;
+  }
+  </style>
+
+    
+   
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{% static 'assets/css/scrollspyNav.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/table-basic.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/scrollspyNav.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/datatables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/filters/checkfilter.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dt-global_style_light.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dt-global_style_dark.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vessel_table_light.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vessel_table_dark.css' %}"> -->
+
+
+{% endblock %}
+
+    ###Dash Analytics
+    {% block active-dash_analytics-key_users %} data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-dash_analytics-key_users %} class="collapse submenu list-unstyled" {% endblock %}
+
+
+
+
+    ###Alianca App
+    {% block active-alianca_app-key_users %}data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-alianca_app-key_users %} class="collapse submenu list-unstyled"{% endblock %}
+
+
+
+    ###Manager App
+    {% block active-manager_app-key_users %}data-active="true" data-toggle="collapse" aria-expanded="true" {% endblock %}
+    {% block show-manager_app-key_users %} class="collapse submenu list-unstyled"{% endblock %}
+    {% block active_manager_app-key_users %} active {% endblock %}
+
+  
+
+
+    {% block structures_lab-key_users %} color:#4361ee {% endblock %}
+
+{% block content %}
+
+<div class="layout-px-spacing">
+
+    <div class="fq-header-wrapper" id="structure_searcher">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 align-self-center order-md-0 order-1">
+                    <div class="faq-header-content">
+                        <h1 class="" style="margin-bottom: 2.5rem;">Montagem de Estruturas</h1>
+                        <h4 class="mt-4 mb-4">Especifique as condições da sua estrutura.</h4>
+                        <div class="row" style="margin-bottom: 3.5rem;">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    
+                                <div class="btn-group  mb-2 me-4" role="group">
+                                    <button id="btndefault" type="button" class="btn dropdown-outlook btn-primary dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" data-initial-value="Visão" aria-haspopup="true" aria-expanded="false">Visão <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                                    <div class="dropdown-menu" aria-labelledby="btndefault" style="">
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-home-fill-1 mr-1"></i>None</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>Otimista</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-bell-fill-2 mr-1"></i>Pessimista</a>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group  mb-2 me-4" role="group">
+                                    <button id="btndefault1" type="button" class="btn dropdown-limited btn-primary dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" data-initial-value="Lucro Potencial" aria-haspopup="true" aria-expanded="false">Lucro Potencial <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                                    <div class="dropdown-menu" aria-labelledby="btndefault1">
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-home-fill-1 mr-1"></i>None</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>Limitado</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-bell-fill-2 mr-1"></i>Ilimitado</a>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="btn-group  mb-2 me-4" role="group">
+                                    <button id="btndefault2" type="button" class="btn dropdown-unlimited btn-primary dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" data-initial-value="Prejuízo Potencial" aria-haspopup="true" aria-expanded="false">Prejuízo Potencial <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                                    <div class="dropdown-menu" aria-labelledby="btndefault2">
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-home-fill-1 mr-1"></i>None</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>Limitado</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-bell-fill-2 mr-1"></i>Ilimitado</a>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group  mb-2 me-4" role="group">
+                                    <button id="btndefault3" type="button" class="btn dropdown-credit btn-primary dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" data-initial-value="Paga/Recebe" aria-haspopup="true" aria-expanded="false">Paga/Recebe <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                                    <div class="dropdown-menu" aria-labelledby="btndefault3">
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-home-fill-1 mr-1"></i>None</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>Recebe</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-bell-fill-2 mr-1"></i>Paga</a>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group  mb-2 me-4" role="group">
+                                    <button id="btndefault4" type="button" class="btn dropdown-legs btn-primary dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" data-initial-value='N° Pernas' aria-haspopup="true" aria-expanded="false">N° Pernas <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                                    <div class="dropdown-menu" aria-labelledby="btndefault4">
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-home-fill-1 mr-1"></i>None</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-home-fill-1 mr-1"></i>1</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>2</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>3</a>
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="flaticon-gear-fill mr-1"></i>4</a>
+                                    </div>
+                                </div>
+
+                                
+
+                            </div>
+                        </div>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <div class="row mt-4 ">
+                            
+                            <div class="col-lg-5 mx-auto">
+                                <button id="btn-submit-search-structure" onclick="filterCards()" type="button" class="btn dropdown-Ilimitado btn-dark dropdown-toggle _effect--ripple waves-effect waves-light" >Buscar </button>
+                                <span class="validation-text" style="display: none;color: red;"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="row mt-4 ">
+                            
+                            <div class="col-lg-5 mx-auto">
+                                <div class="autocomplete-btn">
+                                    <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1" aria-haspopup="true" aria-expanded="false"><input id="submit_stock" class="form-control" aria-controls="autoComplete_list_1" aria-autocomplete="both" placeholder="Ativo..."><ul id="autoComplete_list_1" role="listbox" hidden=""></ul></div>
+                                    <button class="btn btn-primary _effect--ripple waves-effect waves-light">Submit</button>
+                                </div>
+                                <span class="validation-text" style="display: none;color: red;"></span>
+                            </div>
+                        </div>
+                        <p class="mt-4 mb-0">Insira um ativo para poder montar uma estrutura.</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fq-header-wrapper" id="stock_searcher" style="display: none;">
+        <div class="container">
+            <a href="/structures_lab/" type="button" class="back-home-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Home Estruturas
+            </a>
+            <div class="row">
+                <div class="col-md-12 align-self-center order-md-0 order-1">
+                    <div class="faq-header-content">
+                        <h1 class="" style="margin-bottom: 2.5rem;">Ação</h1>
+                        <h4 class="mt-4 mb-4">Insira um ativo para poder montar uma estrutura.</h4>
+                        
+                        <div class="row mt-4 ">
+                            
+                            <div class="col-lg-5 mx-auto">
+                                <div class="autocomplete-btn">
+                                    <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1" aria-haspopup="true" aria-expanded="false"><input id="submit_stock" class="form-control" aria-controls="autoComplete_list_1" aria-autocomplete="both" placeholder="Ativo..."><ul id="autoComplete_list_1" role="listbox" hidden=""></ul></div>
+                                    <button id="submit_button" class="btn btn-primary _effect--ripple waves-effect waves-light">Submit</button>
+                                </div>
+                                <span class="validation-text" style="display: none;color: red;"></span>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="faq container" id="stocks_modal" style="display: none;">
+        <a href="/structures_lab/" type="button" class="back-home-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Home Estruturas
+        </a>
+        
+        <div class="faq-layouting layout-spacing">
+
+            <div class="kb-widget-section">
+
+                <div class="row justify-content-center">
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/MRFG3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">MRFG3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ABEV3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">ABEV3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/PETR4.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">PETR4</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/VALE3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">VALE3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/BBDC4.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">BBDC4</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/BBAS3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">BBAS3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row justify-content-center" style="margin-top: 30px;">
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/B3SA3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">B3SA3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/WEGE3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">WEGE3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/PRIO3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">PRIO3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ELET3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">ELET3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/BPAC11.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">BPAC11</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/JBSS3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">JBSS3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                </div>
+                <div class="row justify-content-center" style="margin-top: 30px;">
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ITUB4.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">ITUB4</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/CSNA3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">CSNA3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/MGLU3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">MGLU3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/SUZB3.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">SUZB3</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/GGBR4.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">GGBR4</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3" style="width: 12%;">
+                        <div class="card card-stocks" >
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/BOVA11.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">BOVA11</h5>
+                                <h5 class="mb-0 price-stock">37.00</h5> <span class="badge badge-light-success">+ 13.6% <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                </div>
+                
+            </div>
+
+          
+
+           
+
+        </div>
+    </div>
+
+    <div class="faq container" id="option_strategies_modal" >
+        
+        
+        <div class="faq-layouting layout-spacing">
+
+            <div class="kb-widget-section">
+
+                <div class="row justify-content-center equity-strats-row">
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies"  data-filter="Otimista LimitadoProfit LimitadoLoss Recebe 2">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/bps.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Bull Put Spread</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies"   data-filter="Pessimista LimitadoProfit LimitadoLoss Recebe 2">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/bcs.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Bear Call Spread</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista LimitadoProfit IlimitadoLoss Recebe 1">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ds.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Dividendo Sintético</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Pessimista LimitadoProfit IlimitadoLoss Recebe 3">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/fence.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Fence</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista LimitadoProfit IlimitadoLoss Recebe 2">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ds.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Financiamento</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista LimitadoProfit IlimitadoLoss Recebe 4">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ds.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Booster (Double Up)</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista IlimitadoProfit LimitadoLoss Recebe 4">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/cbs.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Call Backspread</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista IlimitadoProfit LimitadoLoss Paga 1">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/ds.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Long Call</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista LimitadoProfit LimitadoLoss Recebe 3">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/bps.png'%}" style="width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Zero Cost Collar</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-3 col-lg-3 mb-lg-0 col-md-6 mb-3">
+                        <div class="card card-strategies" data-filter="Otimista Pessimista IlimitadoProfit LimitadoProfit LimitadoLoss IlimitadoLoss Recebe Paga 1 2 3 4">
+                            <div class="card-body" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="card-icon mb-4">
+                                    <img src="{% static 'assets/img/custom_strat.png'%}" style="border-radius: 50%;width: 70%; height: 100%;">
+                                </div>
+                                <h5 class="card-title mb-0">Customized Strategy</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                
+            </div>
+
+          
+
+           
+
+        </div>
+    </div>
+
+    <div id="quote_page" class="middle-content container-xxl p-0" style="display: none;">
+        <a href="/structures_lab/" type="button" class="back-home-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Home Estruturas
+        </a>
+                    
+        <div style="margin-top: 90px;" class="row invoice layout-top-spacing layout-spacing">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                
+                <div class="doc-container">
+
+                    <div class="row">
+
+                        <div class="col-xl-9">
+
+                            <div class="invoice-container">
+                                <div class="invoice-inbox">
+                                    
+                                    <div id="ct" class="">
+                                        
+                                        <div class="invoice-00001">
+                                            <div class="content-section">
+
+                                                <div class="inv--head-section inv--detail-section">
+                                                    <img style="margin-bottom: 25px;" src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" alt="company">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-12 mr-auto">
+                                                            <!-- <img style="margin-bottom: 20px;" src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" alt="company"> -->
+                                                            <div class="d-flex">
+                                                                
+                                                                <h3 class="in-heading align-self-center" style="margin-left: 0;font-size: 26px;"></h3>
+                                                            </div>
+                                                            <p class="inv-street-addr mt-3">XYZ Delta Street</p>
+                                                            <p class="inv-email-address">info@company.com</p>
+                                                            <p class="inv-email-operation" style="color: #0e1726;font-size: 20px;font-weight: 700;">info@company.com</p>
+                                                        </div>
+                                                        
+                                                        <div class="col-sm-6 text-sm-end">
+                                                            <!-- <div style="margin-bottom: 55px;"></div> -->
+                                                            <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4"><span class="inv-title">Invoice : </span> <span class="inv-number">#0001</span></p>
+                                                            <p class="inv-created-date mt-sm-5 mt-3"><span class="inv-title">Momento da Cotação: </span> <span class="inv-date">20 Mar 2022</span></p>
+                                                            
+                                                        </div>                                                                
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                
+                                                <div class="inv--product-table-section">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead class="">
+                                                                <tr>
+                                                                    <th scope="col">Action</th>
+                                                                    <th scope="col">Type</th>
+                                                                    <th scope="col">Ticker</th>
+                                                                    <th scope="col">Due Date</th>
+                                                                    <th scope="col">Strike</th>
+                                                                    <th class="text-end" scope="col">Qty</th>
+                                                                    <th class="text-end" scope="col">Vol.</th>
+                                                                    <th class="text-end" scope="col">Price</th>
+                                                                    <th class="text-end" scope="col">Delta</th>
+                                                                    <th class="text-end" scope="col">Remove</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="inv--total-amounts" style="border-bottom: 0;">
+                                                
+                                                    <div class="row mt-4">
+                                                        <div class="col-sm-5 col-12 order-sm-0 order-1">
+                                                        </div>
+                                                        <div class="col-sm-7 col-12 order-sm-1 order-0">
+                                                            <div class="text-sm-end">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 col-7">
+                                                                        <p class="">Prêmio Total :</p>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5">
+                                                                        <p class="premio-total"></p>
+                                                                    </div>
+                                                                    <div class="col-sm-8 col-7">
+                                                                        <p class="">Prêmio/Equity :</p>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5">
+                                                                        <p class="premio-equity">$315</p>
+                                                                    </div>
+                                                                    <div class="col-sm-8 col-7">
+                                                                        <p class=" discount-rate">Prêmio (R$):</p>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5">
+                                                                        <p class="premio-cliente">$10</p>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                
+
+                                            </div>
+                                        </div> 
+                                        
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-3">
+
+                            <div class="invoice-actions-btn">
+
+                                <div class="invoice-action-btn">
+
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <a id="save-structure" href="javascript:void(0);" class="btn btn-success btn-download _effect--ripple waves-effect waves-light">Salvar Estrutura</a>
+                                        </div>
+                                        <!-- <div class="col-xl-12 col-md-4 col-sm-6">
+                                            <a id="invite-whatsapp-text"  href="javascript:void(0);" class="btn btn-primary btn-send _effect--ripple waves-effect waves-light" data-bs-target=".bd-example-modal-xl">Generate Text</a>
+                                        </div> -->
+                                        <div class="col-xl-12 col-md-4 col-sm-6">
+                                            <a href="javascript:void(0);" class="btn btn-secondary btn-print  action-print">Salvar como PDF</a>
+                                        </div>
+                                        <!-- <div class="col-xl-12 col-md-4 col-sm-6" style="margin-bottom: 20px;">
+                                            <a id="add-option" class="btn btn-dark btn-edit">Add Option</a>
+                                        </div> -->
+                                        <div class="col-xl-12 col-md-4 col-sm-6" style="margin-bottom: 20px;">
+                                            <a id="add-call" class="btn btn-success btn-edit">Add Call</a>
+                                        </div>
+                                        <div class="col-xl-12 col-md-4 col-sm-6">
+                                            <a id="add-put" class="btn btn-danger btn-edit">Add Put</a>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    
+
+                                </div>
+
+                                
+                                
+                            </div>
+
+                            <div class="invoice-actions-btn">
+
+                                <div class="invoice-action-btn">
+
+                                    <div class="row">
+                                        <div class="volatility-product-table-section">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th scope="col">Moneyness</th>
+                                                            <th class="text-end" scope="col">Volatility</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <td>ITM</td>
+                                                        <td class="principal-table-volatility">30%</td>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 25px;">
+
+                        <div class="col-xl-9">
+
+                            <div class="invoice-container">
+                                <div class="invoice-inbox">
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="statbox widget box box-shadow">
+                                            <div class="widget-header">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                        <h4 class="">Payoff Da Estrutura <i onclick="showPlotPerEQSize()" style="color: #0251D3;cursor: pointer;" class="fa fa-info-circle"></i></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="widget-content widget-content-area">
+                                                <div id="payoff-diagram" class=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="loading-card" style="display: none;" class="loading-screen">
+        <div class="card" style="background: transparent;border: 1px solid transparent;box-shadow: 0px 0px 20px transparent;">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="container-spinner mr-2" role="status" aria-hidden="true">
+                <img src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" style="width: 8%; height: 100%;">
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-8 col-lg-7 col-md-7 col-sm-5 text-sm-right text-center layout-spacing align-self-center">
+    <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalTitle" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title add-title" id="addContactModalTitleLabel1">Add Vessel</h5>
+                    <h5 class="modal-title edit-title" id="addContactModalTitleLabel2" style="display: none;">Edit Vessel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="add-contact-box">
+                        <div class="add-contact-content">
+                            <form id="addContactModalTitle">
+                                
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="contact-name">
+                                            <label class="text-left" style="font-size: 12px; text-align: left !important; margin-left:4px;">Option</label>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  Select an option
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                  <input type="text" id="option-search" class="form-control" placeholder="Search...">
+                                                  <div id="options-list">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <label id="option-field" class="text-left" style="font-size: 16px; text-align: left !important; margin-left:4px; margin-top:10px;">Option</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="contact-email">
+                                            <label class="text-left" style="font-size: 12px; text-align: left !important; margin-left:4px;">Qty</label>
+                                            <input type="text" id="qty-inserted" class="form-control" placeholder="Qty">
+                                            <span class="validation-text" style="display: none;"></span>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-edit" class="float-left btn btn-success _effect--ripple waves-effect waves-light" style="display: none;">Save</button>
+
+                    <button class="btn _effect--ripple waves-effect waves-light" data-bs-dismiss="modal"> <i class="flaticon-delete-1"></i> Discard</button>
+
+                    <button id="btn-add" class="btn btn-primary _effect--ripple waves-effect waves-light">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="modal fade inputForm-modal" id="inputFormModal" tabindex="-1" aria-labelledby="inputFormModalLabel" style="display: none; padding-left: 0px;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header" id="inputFormModalLabel">
+            <h5 class="modal-title">Welcome to <b>Cork Admin</b></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div>
+        <div class="modal-body">
+            <form class="mt-0">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                <polyline points="3 7 12 13 21 7"></polyline>
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Email" aria-label="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                <polyline points="3 7 12 13 21 7"></polyline>
+                            </svg>
+                        </span>
+                        <div class="clipboard">
+                            <form class="form-horizontal">
+                                <div class="clipboard-input">
+                                    <textarea type="text" class="form-control" id="copy-basic-input" value="http://www.admin-dashboard.com"></textarea>
+                                    <div class="copy-icon jsclipboard cbBasic" data-bs-trigger="click" title="" data-clipboard-target="#copy-basic-input" data-bs-original-title="Copied" aria-label="Copied"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="form-check form-check-primary form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="form-check-primary">
+                        <label class="form-check-label mb-0" for="form-check-primary">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <a href="javascript:void(0);">Forget Password?</a>
+                </div>
+                
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-light-danger mt-2 mb-2 btn-no-effect _effect--ripple waves-effect waves-light" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-2 btn-no-effect _effect--ripple waves-effect waves-light" data-bs-dismiss="modal">Sign in</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div id="modalWhatsapp" class="modal fade bd-example-modal-xl" tabindex="-1" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="myExtraLargeModalLabel">Whatsapp Selling Text</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div class="clipboard">
+                <form class="form-horizontal">
+                    <div class="clipboard-input">
+                        <textarea type="text" class="form-control input-copy-code" id="textarea-copy" rows="15"></textarea>
+                        <div class="copy-icon jsclipboard cbBasic" data-bs-trigger="click" title="" data-clipboard-target="#textarea-copy" data-bs-original-title="Copied" aria-label="Copied"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
+                    </div>
+                </form>
+            </div> 
+            <p></p>
+            <p></p>                       
+            <div class="d-flex">
+                <div class="col-lg-6">
+                    <div class="btn-group mr-2 btn-group-lg" style="width: 100%;">
+                    <button style="margin-right: 7px;" class="btn btn-success btn-lg dropdown-toggle _effect--ripple waves-effect waves-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdown-button">
+                       Selecione Contato<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="dropdown-menu" style="" id="dropdown-menu">
+                        <!-- Options will be dynamically added here -->
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-6  my-auto">
+                    <input style="margin-left: 7px;"type="text" id="phone-number-selected" class="form-control" placeholder="Número">
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-light-dark _effect--ripple waves-effect waves-light" data-bs-dismiss="modal">Discard</button>
+              <button type="button" id="submit-whatsapp-invitation" class="btn btn-primary _effect--ripple waves-effect waves-light">Enviar Mensagem</button>
+          </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block bottom_scripts %}
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <!-- <script src="{% static 'plugins/table/datatable/painelShowHide.js' %}"></script> -->
+  
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap_new.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js'%}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="{% static 'assets/js/vendors.min.js'%}"></script> -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/js/perfect-scrollbar.min.js'%}"></script>
+    <script src="{% static 'assets/js/clipboard.min.js'%}"></script>
+    <script src="{% static 'assets/js/custom-clipboard.min.js'%}"></script>
+    <script src="{% static 'assets/js/app.js'%}"></script>
+    <script src="{% static 'assets/js/breakUserName.js'%}"></script>
+    <script src="{% static 'assets/js/contact.js'%}"></script>
+    
+    
+    <!-- variaveis de ambiente javascript -->
+    
+    <script>
+      
+
+    </script>
+    <script src="{% static 'assets/js/custom.js' %}"></script> <!--responsável por trazer a tabela completa-->
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script>
+        let tokenOplab = '{{oplab_token|safe}}';
+        let actualFreeInterestRate = '{{free_risk_rate|safe}}'
+        let contactsInformation = {{contacts_information|safe}};
+        let volInformation = {{vol_information|safe}};
+    </script>
+
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="{% static 'assets/js/datatables.js' %}"></script>
+    <script src="{% static 'assets/js/waves.min.js' %}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- <script src="{% static 'assets/js/loopt_voyage_crud.js' %}"></script> -->
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/feather.min.js' %}"></script>
+    <script src="{% static 'assets/js/feather-icon.js' %}"></script>
+    <script src="{% static 'assets/js/structuresLabFiltering.js' %}"></script>
+    <script src="{% static 'assets/js/structures_lab.js' %}"></script>
+    <script src="{% static 'assets/js/saveStructure.js' %}"></script>
+    <script src="{% static 'assets/js/payoff_display.js' %}"></script>
+    <script src="{% static 'assets/js/whatsappFunctions.js' %}"></script>
+    <script src="{% static 'assets/js/enterSubmitInput.js' %}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    
+
+
+{% endblock %}

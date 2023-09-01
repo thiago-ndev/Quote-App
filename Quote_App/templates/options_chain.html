@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Mind | Options Chain </title>
+    <link href="{% static 'assets/css/loader_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/loader_dark.css'%}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'assets/js/loader.js'%}"></script>
+    <!-- /ENABLE LOADERS -->
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/structure_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/main_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/perfect-scrollbar.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/modal.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/tabs.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/search.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link href="{% static 'assets/css/datatables.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom_dt_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/dt-global_style_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-fullcalendar-light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/monokai-sublime.css'%}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'assets/css/plugins_light.css'%}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{% static 'assets/css/custom-fullcalendar-dark.css'%}" rel="stylesheet" type="text/css" /> -->
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    
+    <link href="{% static 'assets/css/crud_check.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+      ::selection {
+  background-color: transparent;
+  color: #1b55e2;
+  }
+  </style>
+
+    
+   
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{% static 'assets/css/scrollspyNav.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/table-basic.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/scrollspyNav.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/datatables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/filters/checkfilter.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dt-global_style_light.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dt-global_style_dark.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vessel_table_light.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vessel_table_dark.css' %}"> -->
+
+
+{% endblock %}
+
+    ###Dash Analytics
+    {% block active-dash_analytics-key_users %} data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-dash_analytics-key_users %} class="collapse submenu list-unstyled" {% endblock %}
+
+
+
+
+    ###Alianca App
+    {% block active-alianca_app-key_users %}data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-alianca_app-key_users %} class="collapse submenu list-unstyled"{% endblock %}
+
+
+
+    ###Manager App
+    {% block active-manager_app-key_users %}data-active="true" data-toggle="collapse" aria-expanded="true" {% endblock %}
+    {% block show-manager_app-key_users %} class="collapse submenu list-unstyled"{% endblock %}
+    {% block active_manager_app-key_users %} active {% endblock %}
+
+
+
+
+    {% block options_chain-key_users %} color:#4361ee {% endblock %}
+
+{% block content %}
+
+<div class="layout-px-spacing" style="margin-top: 25px;">
+    <div class="middle-content container-xxl p-0">
+        <div class="row layout-spacing">
+            <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Options Chain Table</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area" style="border-radius: 0px;">
+                        <div class="col-lg-8 col-md-8 col-sm-9 filtered-list-search mx-auto">
+                            <form class="form-inline my-2 my-lg-0 justify-content-center">
+                                <div class="w-100">
+                                    <input type="text" class="w-100 form-control product-search br-30" id="input-search" placeholder="Search Some Stock...">
+                                    <button class="btn btn-primary _effect--ripple waves-effect waves-light submit-stock" type="button"><svg style="
+                                        padding: 0 !important;
+                                        position: static !important;
+                                        right: auto !important;
+                                        top: auto !important;
+                                        border-radius: 50% !important;
+                                        color: inherit;
+                                        height: auto;
+                                        width: auto;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+                                </div>
+                            </form>
+                        </div>
+                        <table id="style-2" class="table style-2 dt-table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ticker</th>
+                                    <th>Type</th>
+                                    <th class="text-center">Strike</th>
+                                    <th class="text-center dt-no-sorting">Vencimento</th>
+                                    <th>Ask</th>
+                                    <th>Bid</th>
+                                </tr>
+                            </thead>
+                            <tbody id="options-chain-tbody">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-card" style="display: none;" class="loading-screen">
+        <div class="card" style="background: transparent;border: 1px solid transparent;box-shadow: 0px 0px 20px transparent;">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="container-spinner mr-2" role="status" aria-hidden="true">
+                <img src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" style="width: 8%; height: 100%;">
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block bottom_scripts %}
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <!-- <script src="{% static 'plugins/table/datatable/painelShowHide.js' %}"></script> -->
+  
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap_new.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js'%}"></script>
+    <!-- <script src="{% static 'assets/js/vendors.min.js'%}"></script> -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/js/perfect-scrollbar.min.js'%}"></script>
+    <script src="{% static 'assets/js/clipboard.min.js'%}"></script>
+    <script src="{% static 'assets/js/custom-clipboard.min.js'%}"></script>
+    <script src="{% static 'assets/js/app.js'%}"></script>
+    <script src="{% static 'assets/js/breakUserName.js'%}"></script>
+    
+    
+    
+    <!-- variaveis de ambiente javascript -->
+    
+    <script>
+      
+
+    </script>
+    <script src="{% static 'assets/js/custom.js' %}"></script> <!--responsável por trazer a tabela completa-->
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    
+
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    
+    <script src="{% static 'assets/js/waves.min.js' %}"></script>
+    <script src="{% static 'assets/js/manageUsers.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        let tokenOplab = '{{oplab_token|safe}}';
+    </script>
+    
+    <script src="{% static 'assets/js/optionsChain.js' %}"></script>
+    
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/feather.min.js' %}"></script>
+    <script src="{% static 'assets/js/feather-icon.js' %}"></script>
+    <script src="{% static 'assets/js/datatables_options_chain.js' %}"></script>
+    
+    
+    <script>
+        $(document).ready(function() {
+            App.init();
+            c2 = $('#style-2').DataTable({
+            
+            
+            "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
+        "<'table-responsive'tr>" +
+        "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+               "sLengthMenu": "Results :  _MENU_",
+            },
+            "lengthMenu": [5, 10, 20, 50],
+            "pageLength": 10 
+        });
+
+        multiCheck(c2);
+        });
+    </script>
+    
+
+
+{% endblock %}

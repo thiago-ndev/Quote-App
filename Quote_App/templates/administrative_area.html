@@ -1,0 +1,418 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Mind | Administrative Area </title>
+    <link href="{% static 'assets/css/loader_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/loader_dark.css'%}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'assets/js/loader.js'%}"></script>
+    <!-- /ENABLE LOADERS -->
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/structure_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/main_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/perfect-scrollbar.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/modal.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/tabs.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link href="{% static 'assets/css/datatables.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/invoice-preview.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom_dt_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-autoComplete.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/monokai-sublime.css'%}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'assets/css/plugins_light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-fullcalendar-light.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/bsStepper.min.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/custom-bsStepper.css'%}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{% static 'assets/css/custom-fullcalendar-dark.css'%}" rel="stylesheet" type="text/css" /> -->
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    
+    <link href="{% static 'assets/css/crud_check.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+      ::selection {
+  background-color: transparent;
+  color: #1b55e2;
+  }
+  </style>
+
+    
+   
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{% static 'assets/css/scrollspyNav.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/table-basic.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/scrollspyNav.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/datatables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/filters/checkfilter.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dt-global_style_light.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dt-global_style_dark.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vessel_table_light.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vessel_table_dark.css' %}"> -->
+
+
+{% endblock %}
+
+    ###Dash Analytics
+    {% block active-dash_analytics-key_users %} data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-dash_analytics-key_users %} class="collapse submenu list-unstyled" {% endblock %}
+    {% block active_dash_analytics-key_users %} active {% endblock %}
+
+
+
+    ###Alianca App
+    {% block active-alianca_app-key_users %}data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-alianca_app-key_users %} class="collapse submenu list-unstyled"{% endblock %}
+
+
+
+    ###Manager App
+    {% block active-manager_app-key_users %}data-active="false" data-toggle="collapse" aria-expanded="false" {% endblock %}
+    {% block show-manager_app-key_users %} class="collapse submenu list-unstyled"{% endblock %}
+    
+
+  
+
+
+    {% block administrative_area-key_users %} color:#4361ee {% endblock %}
+
+{% block content %}
+
+<div class="layout-px-spacing" style="margin-top: 25px;">
+    <div id="wizard_Default" class="col-lg-12 layout-spacing">
+      <div class="statbox widget box box-shadow">
+          <div class="widget-header">
+              <div class="row">
+                  <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                      <h4>Cadastrar Usuário</h4>
+                  </div>
+              </div>
+          </div>
+          <div class="widget-content widget-content-area">
+              <div class="bs-stepper stepper-form-one linear">
+                  <div class="bs-stepper-header" role="tablist">
+                      <div class="step active" data-target="#defaultStep-one">
+                          <button type="button" class="step-trigger" role="tab" aria-selected="true">
+                              <span class="bs-stepper-circle">1</span>
+                              <span class="bs-stepper-label">Step One</span>
+                          </button>
+                      </div>
+                      <div class="line"></div>
+                      <div class="step" data-target="#defaultStep-two">
+                          <button type="button" class="step-trigger" role="tab" aria-selected="false" disabled="disabled">
+                              <span class="bs-stepper-circle">2</span>
+                              <span class="bs-stepper-label">Step Two</span>
+                          </button>
+                      </div>
+                      <div class="line"></div>
+                      
+                      
+                  </div>
+                  <div class="bs-stepper-content">
+                      <div id="defaultStep-one" class="content fade dstepper-block dstepper-none" role="tabpanel">
+                          <form>
+                              <div class="form-group mb-4">
+                                  <label for="defaultForm-name">Email Address</label>
+                                  <input type="text" class="form-control" id="defaultForm-name">
+                              </div>
+                          </form>
+                          
+                          <div class="button-action mt-5">
+                              <button class="btn btn-secondary btn-prev me-3 _effect--ripple waves-effect waves-light" disabled="">Prev</button>
+                              <button class="btn btn-secondary btn-nxt _effect--ripple waves-effect waves-light">Next</button>
+                          </div>
+                      </div>
+                      <div id="defaultStep-two" class="content fade dstepper-block dstepper-none" role="tabpanel">
+                          <form>
+                            <div class="col-12">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" id="defaultGridCheck">
+                                  <label class="form-check-label" for="defaultGridCheck">
+                                      Acesso Administrativo?
+                                  </label>
+                              </div>
+                          </div>
+                          </form>
+                          
+                          <div class="button-action mt-5">
+                              <button class="btn btn-secondary btn-prev me-3 _effect--ripple waves-effect waves-light">Prev</button>
+                              <button class="btn btn-secondary _effect--ripple waves-effect waves-light submit-button">Submit</button>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+
+          </div>
+      </div>
+    </div>
+    <div id="wizard_Vertical" class="col-lg-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>Cadastrar Contato</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content widget-content-area">
+                
+                <div class="bs-stepper stepper-form-vertical vertical linear">
+                    <div class="bs-stepper-header" role="tablist">
+                        <div class="step crossed" data-target="#verticalFormStep-one">
+                            <button type="button" class="step-trigger" role="tab" aria-selected="false" disabled="disabled">
+                                <span class="bs-stepper-circle">1</span>
+                                <span class="bs-stepper-label">Step One</span>
+                            </button>
+                        </div>
+                        <div class="line"></div>
+                        <div class="step active" data-target="#verticalFormStep-two">
+                            <button type="button" class="step-trigger" role="tab" aria-selected="true">
+                                <span class="bs-stepper-circle">2</span>
+                                <span class="bs-stepper-label">Step Two</span>
+                            </button>
+                        </div>
+                        
+                        
+                    </div>
+
+                    <div class="bs-stepper-content">
+                        <div id="verticalFormStep-one" class="content fade dstepper-block dstepper-none" role="tabpanel">
+                            <form>
+                                <div class="form-group mb-4">
+                                    <label for="verticalFormStepform-name">Nome do Contato</label>
+                                    <input type="text" class="form-control" id="nomeContato" placeholder="Example: Wagner">
+                                </div>
+                            </form>
+                            
+                            <div class="button-action mt-3">
+                                <button class="btn btn-secondary btn-prev me-3 _effect--ripple waves-effect waves-light" disabled="">Prev</button>
+                                <button class="btn btn-secondary btn-nxt _effect--ripple waves-effect waves-light">Next</button>
+                            </div>
+                        </div>
+                        <div id="verticalFormStep-two" class="content fade dstepper-block active" role="tabpanel">
+                            <form>
+                                <div class="form-group mb-4">
+                                    <label for="verticalFormStepEmailAddress">Número (com DDD)</label>
+                                    <input type="email" class="form-control" id="numeroContato" placeholder="Example(RJ): 219999999999">
+                                </div>
+                            </form>
+                            
+                            <div class="button-action mt-3">
+                                <button class="btn btn-secondary btn-prev me-3 _effect--ripple waves-effect waves-light">Prev</button>
+                                <button class="btn btn-secondary submit-novo-contato _effect--ripple waves-effect waves-light">Submit</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="middle-content container-xxl p-0">
+        
+        
+            
+        <div class="invoice-actions-btn" style="margin-bottom: 25px; background-color: rgb(255, 255, 255);">
+                <div class="widget-header">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <h4 style="color: #3b3f5c;
+                            font-size: 17px;
+                            font-weight: 600;
+                            margin: 0;
+                            padding: 16px 15px;
+                            padding-bottom: 30px;
+                            padding-top: 0px;
+                            ">Volatility Table</h4>
+                        </div>
+                        <button id="insert-stock-button" style="margin-left: 20px;margin-bottom: 15px;" class="col-xl-1 btn btn-primary mb-3 me-4 _effect--ripple waves-effect waves-light">Inserir</button>
+                    </div>
+                </div>
+                <div class="invoice-action-btn">
+
+                    <div class="row">
+                        <div class="volatility-product-table-section">
+                            
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="">
+                                        <tr>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Volatility</th>
+                                            <th scope="col">Editar/Apagar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for vol in df_stock_volatility%}
+                                            <tr>
+                                            <td>{{vol.0}}</td>
+                                            <td>{{vol.1}}</td>
+                                            <td class="text-center"><div class="action-btn">
+                                                <svg style="margin-right: 5px;
+                                                cursor: pointer;
+                                                color: #888ea8;
+                                                width: 20px;
+                                                fill: rgba(136, 142, 168, 0.09);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 edit"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+    
+                                                <svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                            </div></td>
+                                            
+                                            </tr>
+                                        {% endfor %}    
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+        </div>
+            
+    </div>
+    
+    
+    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-5 text-sm-right text-center layout-spacing align-self-center">
+        <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalTitle" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title add-title" id="addContactModalTitleLabel1">Add Volatility</h5>
+                        <h5 class="modal-title edit-title" id="addContactModalTitleLabel2" style="display: none;">Edit Volatility</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        
+                        </button>
+                    </div>
+    
+                    <div class="modal-body">
+                        <div class="add-contact-box">
+                            <div class="add-contact-content">
+                                <form id="addContactModalTitle">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="contact-email">
+                                                <label class="text-left" style="font-size: 12px; text-align: left !important; margin-left:4px;">Stock</label>
+                                                <input type="text" id="stock-inserted" class="form-control" placeholder="Stock">
+                                                <span class="validation-text" style="display: none;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="contact-email">
+                                                <label class="text-left" style="font-size: 12px; text-align: left !important; margin-left:4px;">Volatility</label>
+                                                <input type="text" id="vol-inserted" class="form-control" placeholder="Volatility">
+                                                <span class="validation-text" style="display: none;"></span>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-edit" class="float-left btn btn-success _effect--ripple waves-effect waves-light" style="display: none;">Save</button>
+    
+                        <button class="btn _effect--ripple waves-effect waves-light" data-bs-dismiss="modal"> <i class="flaticon-delete-1"></i> Discard</button>
+    
+                        <button id="btn-add" class="btn btn-primary _effect--ripple waves-effect waves-light">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div id="loading-card" style="display: none;" class="loading-screen">
+        <div class="card" style="background: transparent;border: 1px solid transparent;box-shadow: 0px 0px 20px transparent;">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="container-spinner mr-2" role="status" aria-hidden="true">
+                <img src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" style="width: 8%; height: 100%;">
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block bottom_scripts %}
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <!-- <script src="{% static 'plugins/table/datatable/painelShowHide.js' %}"></script> -->
+  
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap_new.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js'%}"></script>
+    <!-- <script src="{% static 'assets/js/vendors.min.js'%}"></script> -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/js/perfect-scrollbar.min.js'%}"></script>
+    <script src="{% static 'assets/js/clipboard.min.js'%}"></script>
+    <script src="{% static 'assets/js/custom-clipboard.min.js'%}"></script>
+    <script src="{% static 'assets/js/app.js'%}"></script>
+    <script src="{% static 'assets/js/breakUserName.js'%}"></script>
+    <!-- <script src="{% static 'assets/js/contact.js'%}"></script> -->
+    
+    
+    <!-- variaveis de ambiente javascript -->
+    
+    <script>
+      
+
+    </script>
+    <script src="{% static 'assets/js/custom.js' %}"></script> <!--responsável por trazer a tabela completa-->
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script>
+        
+    </script>
+
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="{% static 'assets/js/datatables.js' %}"></script>
+    <script src="{% static 'assets/js/waves.min.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    
+    <!-- <script src="{% static 'assets/js/loopt_voyage_crud.js' %}"></script> -->
+    <script src="{% static 'assets/js/cadastrarUser.js' %}"></script>
+    <script src="{% static 'assets/js/administrative_volatility.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/feather.min.js' %}"></script>
+    <script src="{% static 'assets/js/feather-icon.js' %}"></script>
+    <script src="{% static 'assets/js/bsStepper.min.js' %}"></script>
+    <script src="{% static 'assets/js/custom-bsStepper.min.js' %}"></script>
+    
+    
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    
+
+
+{% endblock %}

@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="sidebar-noneoverflow" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    {% block head %}
+    {% endblock %}
+    <link rel="shortcut icon" href="https://mindinc.com.br/wp-content/uploads/2023/07/cropped-Anexo-01-Logo-Aba-32x32.png" />
+    
+    <style>
+        body.dark .layout-px-spacing, .layout-px-spacing {
+            min-height: calc(100vh - 155px) !important;
+        }
+    </style>
+    
+</head>
+<body class="layout-boxed" page="starter-pack">
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="container-spinner align-self-center">
+            <img src="https://lirp.cdn-website.com/8d5fe684/dms3rep/multi/opt/MIND_LOGO-147w.png" style="width: 70%; height: 100%;">
+        </div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container container-xxl" style="display: none;">
+        <header class="header navbar navbar-expand-sm expand-header">
+
+            <!-- <a href="javascript:void(0);" class="nav-link theme-toggle p-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon dark-mode"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun light-mode"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </a> -->
+            
+            <a href="javascript:void(0);" class="sidebarCollapse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </a>
+
+            <ul class="navbar-item flex-row ms-lg-auto ms-0">
+
+                <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="avatar-container">
+                            <div class="avatar avatar-sm avatar-indicators">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="Silver" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                        <div class="user-profile-section">
+                            <div class="media mx-auto">
+                                
+                                <div class="media-body">
+                                    <h5>{{user.username}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            
+                            <div class="dropdown-item">
+                                <a class="" href="/logout" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container " id="container">
+
+        <div class="overlay "></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+     
+        <div class="sidebar-wrapper sidebar-theme">
+            
+            <nav id="sidebar">
+
+                <div class="navbar-nav theme-brand flex-row  text-center">
+                    <div class="nav-logo">
+                        <div class="nav-item theme-logo">
+                            <a >
+                                <!-- <img src="https://mindinc.com.br/wp-content/uploads/2023/07/Logo-MindTech.png" class="navbar-logo" alt="logo"> -->
+                            </a>
+                        </div>
+                        <div class="nav-item theme-text theme-logo">
+                            <!-- <a href="/structures_lab_assessores/" style="background-color: var( --e-global-color-primary );">
+                                <img src="https://mindinc.com.br/wp-content/uploads/2023/07/Logo-MindTech.png" style="width: 200px; height: 50px;" class="navbar-logo" alt="logo">
+                            </a> -->
+
+                            <a href="/structures_lab_assessores/" style="background-color: var( --e-global-color-primary );">
+                                <img src="{% static 'assets/img/bigger-logo.png' %}" style="width: 160px; height: 40px; background-color: #000a6a; border-radius: 6px;" class="navbar-logo" alt="logo">
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <div class="nav-item sidebar-toggle">
+                        <div class="btn-toggle sidebarCollapse">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-left"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <div class="user-info">
+                        
+                        
+                        <div class="profile-img">
+                            <img src="{% static 'assets/img/mindlogopage.png'%}" alt="avatar">
+                        </div>
+                        
+                        <div class="profile-content">
+                            <h6 class="" id="user_side_bar">{{request.session.username}}</h6>
+                            <p class="">Mind Users</p>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+
+                <ul class="list-unstyled menu-categories" id="accordionExample">
+                    <p></p>
+                    <p></p>
+                    <li class="menu {% block active_manager_app-key_users %} {% endblock %}">
+                        <a href="#invoice" data-bs-toggle="collapse" {% block active-manager_app-key_users %}{% endblock %} class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                                <span>Home </span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul  id="invoice" class="collapse submenu list-unstyled" data-parent="#accordionExample">
+                            {% if "adm-users" in request.session.group %} 
+                            <li>
+                                <a href="{%url 'Quote_App:structures_lab' %}" style="{% block structures_lab-key_users %}{% endblock %}">M. Estruturas (Mind)</a>
+                            </li>
+                            {% else %}
+                            {% endif %}
+                            <li>
+                                <a href="{%url 'Quote_App:structures_lab_assessores' %}" style="{% block structures_lab_assessores-key_users %}{% endblock %}">M. Estruturas {% if "adm-users" in request.session.group %}(Assessores) {% else %}{% endif %}</a>
+                            </li>
+                            <!-- <li>
+                                <a href="{%url 'Quote_App:options_chain' %}" style="{% block options_chain-key_users %}{% endblock %}"> Options Chain</a>
+                            </li> -->
+                            <li>
+                                <a href="{%url 'Quote_App:stored_structures' %}" style="{% block stored_structures-key_users %}{% endblock %}"> Estruturas Salvas</a>
+                            </li>
+                            
+                            
+                            
+                        </ul>
+                    </li>
+                    <p></p>
+                    <p></p>
+                    {% if "adm-users" in request.session.group %} 
+                    <li class="menu {% block active_dash_analytics-key_users %} {% endblock %}">
+                        <a href="#users" data-bs-toggle="collapse" {% block active-dash_analytics-key_users %}{% endblock %} class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                <span>Management </span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul id="users" class="collapse submenu list-unstyled" data-parent="#accordionExample">
+                            <li>
+                                <a href="{%url 'Quote_App:administrative_area' %}" style="{% block administrative_area-key_users %}{% endblock %}"> Administrative Area</a>
+                            </li>
+                            <li>
+                                <a href="{%url 'Quote_App:manage_users' %}" style="{% block manage_users-key_users %}{% endblock %}"> Users Management</a>
+                            </li>
+                            
+                            
+                            
+                            
+                        </ul>
+                    </li>
+                    {% else %}
+                    {% endif %}
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <div class="profile-info">
+                   
+                        <div class="user-info" style="background-color: white;">
+                            
+                            <div class="profile-content">
+                                <div class="">
+                                
+                                    <div class="dropdown-item">
+                                        <a class="" href="/" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+
+                </ul>
+
+                
+                
+                
+            </nav>
+            
+
+        </div>
+    
+    <!--  END SIDEBAR  -->
+    <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+
+                <div class="middle-content container-xxl p-0">
+
+                    <!-- BREADCRUMB -->
+                    <!-- <div class="page-meta">
+                        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>{% block title_bread1 %}{% endblock %}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{% block title_bread2 %}Histórico{% endblock %}</li>
+                            </ol>
+                        </nav>
+                    </div> -->
+                    <!-- /BREADCRUMB -->    
+    
+                    <!-- CONTENT AREA -->
+                    <div class="row layout-top-spacing" style="margin-top: 0px;">
+                        <div class="col-md-12">
+                        {% block content%}
+                        {% endblock %}
+                        </div>
+
+                    </div>
+                    <!-- CONTENT AREA -->
+
+                </div>
+
+            </div>
+
+            <div class="footer-wrapper d-flex justify-content-center align-items-center">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © {% now 'Y' %} <a target="_blank" href="https://www.mindinvest.com.br">Mind</a>, All rights reserved.</p>
+                </div>
+                
+            </div>
+            
+        </div>
+        <!--  END CONTENT AREA  -->
+    </div>
+    {% block bottom_scripts %}
+
+    {% endblock %}
+
+</body>
+</html>

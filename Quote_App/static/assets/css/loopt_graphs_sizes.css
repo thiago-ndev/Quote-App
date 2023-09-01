@@ -1,0 +1,160 @@
+#gauge_above {
+    width: 100%;
+    height: 270px;
+    
+  }
+  #gauge_below {
+    width: 100%;
+    height: 270px;
+    
+  }
+  #bar_chart_teu {
+    width: 100%;
+    height: 500px;
+    
+  }
+  #bar_chart_ton {
+    width: 100%;
+    height: 500px;
+    
+  }
+  
+  #gauge_prob {
+    width: 100%;
+    height: 500px;
+    
+  }
+  #venn_diagram {
+    width: 100%;
+    height: 500px;
+  }
+  #interactive_combinated_chart {
+    width: 100%;
+    height: 400px;
+  }
+  #historic_pol_voyage {
+    width: 100%;
+    height: 540px;
+  }
+  #historic_pol_voyage_ton {
+    width: 100%;
+    height: 540px;
+  }
+  #about_even_chart {
+    width: 100%;
+    height: 230px;
+    
+}
+#better_than_even_chart {
+  width: 100%;
+  height: 230px;
+}
+#almost_certainly_chart {
+  width: 100%;
+  height: 230px;
+}
+#gauge_volume {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+#gauge_volume_daily {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+}
+#gauge_performance_daily{
+  width: 100%;
+  height: 180px;
+  margin-top: -110px; 
+}
+#gauge_rentability_daily{
+  width: 100%;
+  height: 180px;
+  margin-top: -110px;
+}
+#gauge_rent {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+#gauge_performance {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+#gauge_custos_extras {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+#gauge_frequency {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+#gauge_peso_rent {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+#gauge_custos_extras_daily {
+  width: 100%;
+  height: 220px;
+  
+   
+}
+#gauge_frequency_daily {
+  width: 100%;
+  height: 180px;
+  margin-top: -110px;
+  
+   
+}
+#gauge_peso_rent_daily {
+  width: 100%;
+  height: 220px;
+  
+   
+}
+#gauge_inadimplencia {
+  width: 100%;
+  height: 220px;
+  /* height: 180px;*/
+  margin-top: -125px; 
+}
+
+
+#chart-widget1 {
+  width: 100%;
+  height: 220px;
+  
+}
+#chart_widget_2 {
+  width: 100%;
+  height: 500px;
+  
+}
+#chart-widget3{
+  width: 100%;
+  height: 220px;
+}
+
+#low_prob_plot {
+  width: 100%;
+  height: 200px;
+}
+#medium_prob_plot {
+  width: 100%;
+  height: 200px;
+}
+#high_prob_plot {
+  width: 100%;
+  height: 200px;
+}

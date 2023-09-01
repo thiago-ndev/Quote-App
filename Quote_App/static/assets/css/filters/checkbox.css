@@ -1,0 +1,34 @@
+.select-box{
+    position: absolute;
+    z-index: 1000;
+    color: #343a40 !important;
+    background-color: rgb(241, 242, 243) !important;
+}
+.filtros .col{
+    padding:0;
+    
+}
+.select-box label{
+    color: #343a40;}
+
+
+.select-dimension{
+    padding: 0.4rem 0.4rem !important;
+}
+.search-width{
+    max-width: 100px !important;
+    margin-left: 4px !important;
+}    
+.selecting-box{
+    background-color: #3b3f5c !important;
+    color: #f6f6f6 !important;
+}
+.selecting-label label{
+    color: #f6f6f6 !important;
+}
+.bord-button {
+    border: 1px solid #3b3f5c !important;
+    color: #fff;
+    background-color: transparent;
+    box-shadow: none;
+}

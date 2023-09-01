@@ -1,0 +1,32 @@
+.container-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate3d(0,0,1,0deg);
+    }
+    to {
+      transform: rotate3d(0,0,1,360deg);
+    }
+  }
+
+  #back-home-button {
+    background-color: transparent; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    padding: 12px 20px; /* Espaçamento interno */
+    border: none; /* Sem borda */
+    cursor: pointer; /* Cursor de mãozinha */
+    font-size: 16px; /* Tamanho da fonte */
+    margin: 10px 0; /* Margem */
+    position: fixed; /* Fixa na tela */
+  top: 10px; /* Distância do topo */
+  left: 10px; /* Distância da esquerda */
+  z-index: 9999; /* z-index máximo */
+  }
+  

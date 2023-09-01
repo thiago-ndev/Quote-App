@@ -1,0 +1,155 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Description: Template para setup de django app do ambiente de demo
+ 
+Parameters:
+  AppName:
+    Description: "Nome do django app"
+    Type: String
+    Default: "django-mind"
+  DockerImageName:
+    Description: "uri da imagem no ECR"
+    Type: String
+    Default: "665550216879.dkr.ecr.us-east-1.amazonaws.com/django-mind-image"
+  SubNet1:
+    Description: "Private Subnet 1"
+    Type: String
+    Default: "subnet-0a3f4069215cbacb0"
+  SecurityGroup:
+    Description: "Security Group ECS"
+    Type: String
+    Default: "sg-0313e54116a667243"
+  TargetGroup:
+    Description: "Arn do Target Group"
+    Type: String
+    Default: "arn:aws:elasticloadbalancing:us-east-1:665550216879:targetgroup/my-target-group/9722c28b70c4188d"
+  Env:
+    Description: "Enviroment dev-prod"
+    Type: String
+    Default: "dev"
+  AppVersion:
+    Description: "Versao"
+    Type: String
+    Default: "3_1"
+  SecretManager:
+    Description: "Nome do secret manager"
+    Type: String
+    Default: "mind-dev-secrets"
+  
+
+
+Resources:
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: !Sub '/ecs/${AppName}-task-definition'
+      Tags: 
+        - Key: resource_type
+          Value: demo_app
+
+
+  JobRole:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "ecs-tasks.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns: 
+        - "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
+        - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+        - "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
+        - "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+        - "arn:aws:iam::aws:policy/AmazonCognitoPowerUser"
+      Path: "/" 
+
+  Cluster:
+    Type: AWS::ECS::Cluster
+    Properties: 
+      CapacityProviders: 
+        - "FARGATE"
+        - "FARGATE_SPOT"
+      ClusterName: !Sub '${AppName}-cluster'
+      Tags: 
+        - Key: resource_type
+          Value: demo_app
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties: 
+      ContainerDefinitions: 
+        -
+          Image: !Ref DockerImageName
+          Name: !Sub '${AppName}-container'
+          DockerLabels:
+            version: !Sub '${AppVersion}'
+          Memory: 2048
+          LogConfiguration:
+            LogDriver: awslogs
+            Options: 
+              awslogs-group: !Sub "/ecs/${AppName}-task-definition"
+              awslogs-region: "us-east-1"
+              awslogs-stream-prefix: "ecs"
+          PortMappings: 
+            - 
+              ContainerPort: 443
+              HostPort: 443
+              Protocol: tcp
+          Environment:
+            -   Name: 'ENV'
+                Value: !Ref Env
+            -   Name: 'SECRET_MANAGER_NAME'
+                Value: !Ref SecretManager
+          Privileged: No
+      Family: !Sub '${AppName}-task-definition'
+      ExecutionRoleArn: ecsTaskExecutionRole
+      RuntimePlatform:
+        OperatingSystemFamily: 'LINUX'
+
+      Memory: 2048
+      Cpu: 1024
+      RequiresCompatibilities:
+        - "FARGATE"
+        - "EC2"
+      NetworkMode: awsvpc
+      Tags: 
+        - Key: resource_type
+          Value: demo_app
+      TaskRoleArn: !GetAtt JobRole.Arn
+
+
+  ECSService:
+    Type: AWS::ECS::Service
+    Properties: 
+      Cluster: !GetAtt Cluster.Arn
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: true
+        MinimumHealthyPercent: 100
+      DeploymentController: 
+          Type: 'ECS'
+      DesiredCount: 1
+      LaunchType: FARGATE
+      LoadBalancers: 
+        - ContainerName: !Sub '${AppName}-container'
+          ContainerPort: 443
+          TargetGroupArn: !Ref TargetGroup
+      NetworkConfiguration: 
+        AwsvpcConfiguration: 
+          SecurityGroups: 
+            - !Ref SecurityGroup
+          Subnets: 
+            - !Ref SubNet1
+      SchedulingStrategy: REPLICA
+      ServiceName: !Sub '${AppName}-service'
+      Tags: 
+        - Key: resource_type
+          Value: demo_app
+      TaskDefinition: !Ref TaskDefinition
