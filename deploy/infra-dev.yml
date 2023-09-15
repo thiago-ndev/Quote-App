@@ -29,7 +29,7 @@ Parameters:
   AppVersion:
     Description: "Versao"
     Type: String
-    Default: "3_1"
+    Default: "3_6"
   SecretManager:
     Description: "Nome do secret manager"
     Type: String

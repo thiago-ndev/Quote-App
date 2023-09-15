@@ -1,2 +1,1 @@
-# Quote-App
-Projeto MindTech
+# Structures-Quote-App

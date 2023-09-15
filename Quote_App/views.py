@@ -476,6 +476,7 @@ class QuotePrincipalView(UserAccessMixin, TemplateView):
         objeto = s3.Object(s3_bucket, s3_path_vol_balization).get()
         body = objeto["Body"].read()
         df_stock_volatility = pd.read_csv(BytesIO(body))
+        
         df_stock_volatility["volatility"] = df_stock_volatility["volatility"].astype(
             float
         )
@@ -573,6 +574,7 @@ class QuotePrincipalAssessoresView(UserAccessMixin, TemplateView):
         objeto = s3.Object(s3_bucket, s3_path_vol_balization).get()
         body = objeto["Body"].read()
         df_stock_volatility = pd.read_csv(BytesIO(body))
+        
         df_stock_volatility["volatility"] = df_stock_volatility["volatility"].astype(
             float
         )

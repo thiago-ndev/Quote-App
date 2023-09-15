@@ -50,7 +50,7 @@ function extractTableData() {
         
         // Delete the specified properties from the object
         delete obj.Ticker;
-        delete obj["Due Date"];
+        delete obj["Vencimento"];
         delete obj.Remove;
       }
     
@@ -73,35 +73,75 @@ let totalCashAmount = 0;
 
 for (let i = 0; i < jsonData.length; i++) {
     const option = jsonData[i];
-    const action = option.Action.toLowerCase();
-    const optionType = option["Type"].toLowerCase();
+    const action = option.Ação.toLowerCase();
+    const optionType = option["Tipo"].toLowerCase();
     const strike = parseFloat(option.Strike);
     const price = parseFloat(option.Price);
-    const qty = parseFloat(option.Qty);
+    const qty = parseFloat(option.Quantidade);
 
-    for (let j = 0; j < stockPrices.length; j++) {
+    if (optionStrategySelected == 'Financiamento'){
+      for (let j = 0; j < stockPrices.length; j++) {
         const stockPrice = stockPrices[j];
         let payoff = 0;
 
-        if (action === "compra") {
-            if (optionType === "put") {
-                payoff = Math.max(strike - stockPrice, -price);
-            } else if (optionType === "call") {
-                payoff = Math.max(stockPrice - strike, -price);
-            }
-        } else if (action === "venda") {
-            if (optionType === "put") {
-                payoff = Math.min(stockPrice - strike, price);
-            } else if (optionType === "call") {
-                payoff = Math.min(strike - stockPrice, price);
-            }
-        }
+        if (action === "compra" || action === "buy") {
+          if (optionType === "put") {
+              payoff += Math.max(strike - stockPrice, -price) * qty;
+          } else if (optionType === "call") {
+              payoff += Math.max(stockPrice - strike, -price) * qty;
+          }
+      } else if (action === "venda" || action === "sell") {
+          if (optionType === "put") {
+              payoff += Math.min(stockPrice - strike, price) * qty;
+          } else if (optionType === "call") {
+              // payoff += Math.min(strike - stockPrice, price) * qty;
+              if (stockPrice>strike){
+                payoff += (price) * qty
 
-        combinedPayoff[j] += payoff * qty;
+              } else if (stockPrice> (strike-price)){
+                payoff += (stockPrice - (strike + price)) * qty
+
+              } else {
+                payoff += (stockPrice - (strike + price)) * qty
+
+              }
+              
+          }
+      }
+
+        combinedPayoff[j] += payoff;
+      }
+    } else{
+      for (let j = 0; j < stockPrices.length; j++) {
+        const stockPrice = stockPrices[j];
+        let payoff = 0;
+
+        if (action === "compra" || action === "buy") {
+          if (optionType === "put") {
+              payoff += Math.max(strike - stockPrice, -price) * qty;
+          } else if (optionType === "call") {
+              payoff += Math.max(stockPrice - strike, -price) * qty;
+          }
+      } else if (action === "venda" || action === "sell") {
+          if (optionType === "put") {
+              payoff += Math.min(stockPrice - strike, price) * qty;
+          } else if (optionType === "call") {
+              payoff += Math.min(strike - stockPrice, price) * qty;
+              
+              
+          }
+      }
+
+        combinedPayoff[j] += payoff;
+      }
     }
+
+    
 
     totalCashAmount += price * qty;
 }
+
+
 
 // Create the data array for Plotly.js
 const data = [
@@ -169,9 +209,9 @@ const layout = {
 };
 
 // Create the plot
-console.log(data)
+
 // Plotly.newPlot('payoff-diagram', data, layout);
-Plotly.newPlot('payoff-diagram-board', data, layout);
+Plotly.newPlot('payoff-diagram', data, layout);
 
     }
   }

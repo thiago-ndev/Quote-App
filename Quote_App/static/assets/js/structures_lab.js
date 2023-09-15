@@ -161,6 +161,7 @@ function calculateOptionPrice() {
         return prevDelta < currDelta ? prev : curr;
       });
       var volatility = parseFloat(closestRecord.volatility)/100;
+      console.log(volatility)
       row.cells[6].textContent = closestRecord.volatility;
       row.cells[6].classList.add('balizated-vol')
     } else{

@@ -22,72 +22,190 @@ let actualStockPrice;
 let realTimeVol = true;
 
 
-// Define the filterCards function
+// Função para atualizar a exibição dos cards com base nas caixas de seleção (checkbox)
 function filterCards() {
+  const checkboxes = document.querySelectorAll('.filter-checkbox');
+  const selectedFilters = [];
 
-  const outlookDropdown = document.querySelector('.dropdown-outlook');
-  const limitedDropdown = document.querySelector('.dropdown-limited');
-  const unlimitedDropdown = document.querySelector('.dropdown-unlimited');
-  const creditDropdown = document.querySelector('.dropdown-credit');
-  const legsDropdown = document.querySelector('.dropdown-legs');
+  checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedFilters.push(checkbox.getAttribute('data-filter'));
+      }
+  });
 
-  outloook = outlookDropdown.textContent.trim();
-  console.log(outloook)
-  profitStatus = limitedDropdown.textContent.trim();
-  lossStatus = unlimitedDropdown.textContent.trim();
-  creditDebit = creditDropdown.textContent.trim();
-  legsNumber = legsDropdown.textContent.trim();
-  
   const cards = document.querySelectorAll('.card-strategies');
-// Iterate over each card
-cards.forEach(card => {
-  let shouldDisplay = true; // Initialize shouldDisplay
 
-  if (outloook !== 'Visão') {
-    const outlookMatch = card.getAttribute('data-filter').includes(outloook);
-    const closestDiv = card.closest('.col-xxl-2');
-    
-      shouldDisplay = shouldDisplay && outlookMatch; // Update shouldDisplay
-    
-  }
-
-  if (profitStatus !== 'Lucro Potencial') {
-    const profitStatusMatch = card.getAttribute('data-filter').includes(profitStatus + 'Profit');
-    const closestDiv = card.closest('.col-xxl-2');
-    
-      shouldDisplay = shouldDisplay && profitStatusMatch; // Update shouldDisplay
-      
-    
-  }
-
-  if (lossStatus !== 'Prejuízo Potencial') {
-    const lossStatusMatch = card.getAttribute('data-filter').includes(lossStatus + 'Loss');
-    const closestDiv = card.closest('.col-xxl-2');
-    
-      shouldDisplay = shouldDisplay && lossStatusMatch; // Update shouldDisplay
-    
-  }
-
-  if (creditDebit !== 'Paga/Recebe') {
-    const creditDebitMatch = card.getAttribute('data-filter').includes(creditDebit);
-    const closestDiv = card.closest('.col-xxl-2');
-    
-      shouldDisplay = shouldDisplay && creditDebitMatch; // Update shouldDisplay
-    
-  }
-
-  if (legsNumber !== 'N° Pernas') {
-    const legsNumberMatch = card.getAttribute('data-filter').includes(legsNumber);
-    const closestDiv = card.closest('.col-xxl-2');
-    
-      shouldDisplay = shouldDisplay && legsNumberMatch; // Update shouldDisplay
-    
-  }
-
-  const closestDiv = card.closest('.col-xxl-2');
-  closestDiv.style.display = shouldDisplay ? 'block' : 'none'; // Set display property
-});
+  cards.forEach(card => {
+      const filters = card.getAttribute('data-filter').split(' ');
+      const shouldDisplay = selectedFilters.every(filter => filters.includes(filter));
+      const closestDiv = card.closest('.col-xxl-2');
+      closestDiv.style.display = shouldDisplay ? 'block' : 'none';
+  });
 }
+
+// function recommendCardsBasedOnSelection() {
+//   const checkboxes = document.querySelectorAll('.filter-checkbox');
+//   let noFilterSelected = true;
+//   let selectedFilter = '';
+//
+//   checkboxes.forEach(checkbox => {
+//     if (checkbox.checked) {
+//       noFilterSelected = false;
+//       selectedFilter = checkbox.getAttribute('data-filter');
+//     }
+//   });
+//
+//   if (noFilterSelected) {
+//     const allRecommendedCards = document.querySelectorAll('.recommended');
+//     allRecommendedCards.forEach(card => {
+//       const cardFilter = card.querySelector('.card-strategies-recommended').getAttribute('data-filter');
+//       if (cardFilter.includes(selectedFilter)) {
+//         card.style.display = 'block';
+//       } else {
+//         card.style.display = 'none';
+//       }
+//     });
+//   }
+// }
+
+
+function filterRecommendedCardsOnly() {
+  const checkboxes = document.querySelectorAll('.filter-checkbox');
+  const selectedFilters = [];
+  const selectedRecommend = [];
+
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      selectedFilters.push(checkbox.getAttribute('data-filter'));
+      console.log(selectedFilters)
+    }
+  });
+
+
+  // Ocultar todos os blocos de ação recomendados
+  const allRecommendedCards = document.querySelectorAll('.recommended');
+  allRecommendedCards.forEach(card => {
+    card.style.display = 'none';
+
+  });
+
+
+
+  // Exibir apenas os blocos de ação de fatura recomendados que correspondem aos filtros selecionados
+  const recommendedCards = document.querySelectorAll('.card-strategies-recommended');
+  recommendedCards.forEach(card => {
+  const filters = card.getAttribute('data-filter').split(' ');
+  const shouldDisplay = selectedFilters.every(filter => filters.includes(filter));
+  const closestDiv2 = card.closest('.recommended');
+
+  // let title = card.querySelector('.card-title').textContent;
+  // console.log(title)
+  // console.log(closestDiv2)
+
+
+    if (shouldDisplay) {
+      // if(closestDiv2.textContent.includes(title)){
+      //   closestDiv2.textContent = closestDiv2.textContent.replace(title, '');
+      //   console.log(title.textContent)
+      // }
+      closestDiv2.style.display = 'block';
+    }
+
+  });
+}
+// Função para lidar com a seleção exclusiva de checkboxes (apenas uma pode ser selecionada por vez)
+document.addEventListener("DOMContentLoaded", function () {
+  function handleExclusiveSelection(checkbox, checkboxes) {
+      if (checkbox.checked) {
+          checkboxes.forEach(otherCheckbox => {
+              if (otherCheckbox !== checkbox) {
+                  otherCheckbox.checked = false;
+              }
+          });
+      }
+  }
+  
+
+  // Categoria: Visão
+  const visaoOtimista = document.getElementById("visao-otimista-checkbox");
+  const visaoPessimista = document.getElementById("visao-pessimista-checkbox");
+
+  visaoOtimista.addEventListener("click", function () {
+      handleExclusiveSelection(visaoOtimista, [visaoPessimista]);
+  });
+
+  visaoPessimista.addEventListener("click", function () {
+      handleExclusiveSelection(visaoPessimista, [visaoOtimista]);
+  });
+
+  // Categoria: Lucro Potencial
+  const lucroLimitado = document.getElementById("lucro-limitado-checkbox");
+  const lucroIlimitado = document.getElementById("lucro-ilimitado-checkbox");
+
+  lucroLimitado.addEventListener("click", function () {
+      handleExclusiveSelection(lucroLimitado, [lucroIlimitado]);
+  });
+
+  lucroIlimitado.addEventListener("click", function () {
+      handleExclusiveSelection(lucroIlimitado, [lucroLimitado]);
+  });
+
+  // Categoria: Prejuízo Potencial
+  const prejuizoLimitado = document.getElementById("prejuizo-limitado-checkbox");
+  const prejuizoIlimitado = document.getElementById("prejuizo-ilimitado-checkbox");
+
+  prejuizoLimitado.addEventListener("click", function () {
+      handleExclusiveSelection(prejuizoLimitado, [prejuizoIlimitado]);
+  });
+
+  prejuizoIlimitado.addEventListener("click", function () {
+      handleExclusiveSelection(prejuizoIlimitado, [prejuizoLimitado]);
+  });
+
+  // Categoria: Paga ou Recebe
+  const recebe = document.getElementById("recebe-checkbox");
+  const paga = document.getElementById("paga-checkbox");
+
+  recebe.addEventListener("click", function () {
+      handleExclusiveSelection(recebe, [paga]);
+  });
+
+  paga.addEventListener("click", function () {
+      handleExclusiveSelection(paga, [recebe]);
+  });
+
+  // Categoria: N° Pernas
+  const perna1 = document.getElementById("01-perna-checkbox");
+  const perna2 = document.getElementById("02-perna-checkbox");
+  const perna3 = document.getElementById("03-perna-checkbox");
+  const perna4 = document.getElementById("04-perna-checkbox");
+
+  perna1.addEventListener("click", function () {
+      handleExclusiveSelection(perna1, [perna2, perna3, perna4]);
+  });
+
+  perna2.addEventListener("click", function () {
+      handleExclusiveSelection(perna2, [perna1, perna3, perna4]);
+  });
+
+  perna3.addEventListener("click", function () {
+      handleExclusiveSelection(perna3, [perna1, perna2, perna4]);
+  });
+
+  perna4.addEventListener("click", function () {
+      handleExclusiveSelection(perna4, [perna1, perna2, perna3]);
+  });
+});
+
+
+// Adicionar um evento de mudança a todas as caixas de seleção
+document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('change', filterCards);
+});
+
+document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('click', filterRecommendedCardsOnly);
+});
 
 function calculateClientPrime() {
   const tableBody = document.querySelector(".inv--product-table-section table tbody");
@@ -114,7 +232,7 @@ function calculateClientPrime() {
   });
 
   const premioQtyTotal = document.querySelector(".premio-cliente");
-  premioQtyTotal.style.color = clientPrime >= 0 ? 'green' : 'red';
+  premioQtyTotal.style.color = clientPrime >= 0 ? '#00ab55' : 'red';
   var totalPrimeRounded = clientPrime.toFixed(2)
   premioQtyTotal.textContent = totalPrimeRounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
@@ -242,15 +360,38 @@ function calculateTotalPrice() {
   totalPrime = totalPrice.toFixed(2);
   const premioTotal = document.querySelector(".premio-total");
   premioTotal.textContent = totalPrice.toFixed(2);
+
+  // Bloco adiionado para criação de novo recurso para exibição de cenários de alta, parcial e baixa
+  // Obtem o valor do prêmio total (R$) para usar nos cenários
+  const getPremioTotalToScenarios = document.querySelector(".premio-total");
+  getPremioTotalToScenarios.textContent = totalPrice.toFixed(2);
+
+  // Cálculo da diferença do strike menos o preço do prêmio total
+  const partialScenarioValue = parseFloat(document.getElementById("partial-scenario").textContent);
+  const premioTotalScenariosValue = parseFloat(document.querySelector(".premio-total").textContent);
+  const partialResultValue = partialScenarioValue - premioTotalScenariosValue;
+
+  // Exibir o resultado da diferença do strike menos o preço do prêmio total
+  const partialResultElement = document.getElementById("partial-result");
+  partialResultElement.textContent = (partialResultValue + 0.02).toFixed(2);
+
+  // Obtem o valor calculado para o cenário de perda
+  const bearishResultElement = document.getElementById("strike-bearish-scenario");
+  bearishResultElement.textContent = partialResultValue.toFixed(2);
 }
 
 function recalculatePrimeEquity() {
   premioMoment = parseFloat(totalPrime)
   actualStockPrice = parseFloat(document.querySelector('.inv-title').textContent)
   const primeEquity = document.querySelector('.premio-equity');
-  primeEquity.style.color = (premioMoment/actualStockPrice) >= 0 ? 'green' : 'red';
-  document.querySelector('.premio-equity').textContent = `${(((premioMoment/actualStockPrice).toFixed(4)) * 100).toFixed(2)}%`;
+  
+  // Modificado para não exibir mais o valor negativo (exemplo: -1.43%) do prêmio equity
+  const equityRatio = premioMoment / actualStockPrice;
+  const absoluteEquityRatio = Math.abs(equityRatio);
+  
+  primeEquity.textContent = `${(absoluteEquityRatio * 100).toFixed(2)}%`;
 }
+
 function formatDateTime(dateTime) {
   var year = dateTime.getFullYear();
   var month = dateTime.getMonth() + 1;
@@ -504,20 +645,37 @@ submitButton.addEventListener('click', (event) => {
 
 
           } else if (optionStrategySelected=="Dividendo Sintético"){
+
+
+
             const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+            // verifica se ja tem alguma linha na tabela e remove
+            const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
             fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
             .then(response => response.json())
             .then(data => {
             stockOptionsChain = data;
+            // Lista com todas as DueDates
+            const uniqueDueDates = [...new Set(stockOptionsChain.map(option => option.due_date))];
+
             const filteredData = data.filter(record =>
               record.category === "PUT" &&
-              parseFloat(record.strike) < 0.88*actualStockPrice &&
-              ((new Date(record.due_date) - Date.now()) / (1000 * 60 * 60 * 24)) > 35
-            )
+              parseFloat(record.strike) < 0.95* actualStockPrice &&
+              record.due_date === uniqueDueDates[0]
+              )
             .sort((a, b) => b.strike - a.strike)
             .slice(0, 1);
-          
-          
+
+            for (let i = 0; i < filteredData.length; i++) {
+              const dueDate = filteredData[i].due_date;
+              console.log(`Due Date ${i + 1}: ${dueDate}`);
+            }
+
           
             filteredData.forEach((record, index) => {
                 const action = 'Sell';
@@ -555,7 +713,17 @@ submitButton.addEventListener('click', (event) => {
 
 
           } else if (optionStrategySelected=="Fence"){
+            const fence = document.getElementById('fence')
+            fence.style.display = 'none'
+
             const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+            // verifica se ja tem alguma linha na tabela e remove
+            const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
             fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
             .then(response => response.json())
             .then(data => {
@@ -645,7 +813,19 @@ submitButton.addEventListener('click', (event) => {
             })
             .catch(error => console.error(error));
           } else if (optionStrategySelected=="Financiamento"){
+
+            const financ = document.getElementById('financiamento')
+            financ.style.display = 'none'
+
+
             const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+            // Verifica se a tabela ja tem alguma linha
+            const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
             fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
             .then(response => response.json())
             .then(data => {
@@ -1187,6 +1367,57 @@ document.querySelectorAll('.card-strategies').forEach(card => {
     });
 });
 
+document.querySelectorAll('.card-strategies-recommended').forEach(card => {
+  card.addEventListener('click', (event) => {
+    // Obtém o título do card clicado
+    optionStrategySelected = card.querySelector('.card-title').textContent;
+    document.getElementById('loading-card').style.display = 'block';
+    // Faça o que quiser com o título do card clicado
+
+
+
+    fetch('https://api.oplab.com.br/v3/market/stocks', { headers })
+    .then(response => response.json())
+    .then(data => {
+      // check if the submitted value is in the field symbol of the returned JSON
+      availableStocks = data;
+      $(".card-stocks").each(function() {
+        var symbol = $(this).find(".card-title").text().trim();
+        var stock = availableStocks.find(function(item) {
+            return item.symbol === symbol;
+        });
+
+        if (stock) {
+            // Update close price
+            $(this).find(".price-stock").text(stock.close);
+
+            // Update variation
+            var badge = $(this).find(".badge");
+            var variation = stock.variation;
+
+            if (typeof variation === "number" && !isNaN(variation)) {
+                badge.text(variation + "%");
+
+                if (variation >= 0) {
+                    badge.removeClass("badge-danger").addClass("badge-light-success");
+                } else {
+                    badge.removeClass("badge-light-success").addClass("badge-danger");
+                }
+            }
+        }
+    });
+    document.getElementById('structure_searcher').style.display = 'none';
+    optionStratsModal.style.display = 'none';
+    document.getElementById('stock_searcher').style.display = 'block';
+    document.getElementById('stocks_modal').style.display = 'block';
+    document.getElementById('loading-card').style.display = 'none';
+    document.getElementById('quote_page').style.display = 'none';
+    })
+    .catch(error => console.error(error))
+
+
+    });
+});
 
 
 
@@ -1197,22 +1428,75 @@ document.querySelector('.action-print').addEventListener('click', function(event
 });
 
 
+// Exibe o popup personalizado
+function showCustomPopup() {
+  const customPopup = document.getElementById('custom-popup');
+  customPopup.style.display = 'block';
+}
+
+// Oculta o popup personalizado
+function hideCustomPopup() {
+  const customPopup = document.getElementById('custom-popup');
+  customPopup.style.display = 'none';
+}
+
+//Função para coletar os textos de todas as divs da estratégia para copiar para a área de transferência
+function copyToClipboard() {
+  const text1 = document.getElementById('premio-total').innerText;
+  const text2 = document.getElementById('premio-equity').innerText;
+  const text3 = document.getElementById('premio-cliente').innerText;
+  const text4 = document.getElementById('strike-bullish-scenario').innerText;
+  const text5 = document.getElementById('partial-scenario').innerText;
+  const text6 = document.getElementById('partial-result').innerText;
+  const text7 = document.getElementById('strike-bearish-scenario').innerText;
+
+  const text8 = document.getElementById('copy-asset-name').innerText;
+  const text9 = document.getElementById('copy-asset-price').innerText;
+  const text10 = document.getElementById('copy-asset-percent').innerText;
+  
+  const text11 = document.getElementById('copy-option-type').innerText;
+  const text12 = document.getElementById('copy-strike').innerText;
+  
+  const text13 = document.getElementById('copy-maturity');
+  var selectedOption = text13.options[text13.selectedIndex];
+  var selectedText = selectedOption.textContent;
+
+  const text14 = document.getElementById('copy-action-name').innerText;
+  const formattedText14 = (text14 === 'Venda') ? text14.replace('a', 'e') : text14;
+
+  // Formata o texto no padrão desejado
+  const formattedText = `${text8} - ${text9} (${text10})\n\n${formattedText14} ${text11} (${text12})\n\nVencimento: ${selectedText}\n\nPrêmio Total: ${text1} (${text2})\nPrêmio em (R$): ${text3}\n\nLucro Total: No vencimento, ativo maior ou igual a R$${text4}\nLucro Parcial: No vencimento, ativo entre R$${text5} e R$${text6}\nCenário de Perda: No vencimento, ativo igual ou menor que R$${text7}`;
+
+  // Cria um elemento <textarea> temporário para armazenar o texto a ser copiado
+  const tempTextarea = document.createElement('textarea');
+  tempTextarea.value = formattedText;
+  document.body.appendChild(tempTextarea);
+
+  // Seleciona e copia o texto do <textarea>
+  tempTextarea.select();
+  document.execCommand('copy');
+
+  // Remove o <textarea> temporário da página
+  document.body.removeChild(tempTextarea);
+
+  // Exibe a mensagem de sucesso no rodapé da div da estratégia
+  const successMessage = document.getElementById('copy-success-message');
+  successMessage.style.display = 'inline';
+
+  // Define um temporizador para esconder a mensagem após algum tempo (por exemplo, 4 segundos)
+  setTimeout(() => {
+      successMessage.style.display = 'none';
+  }, 4000);
+}
+
 const cards = document.querySelectorAll('.card-stocks');
 
 cards.forEach(card => {
   card.addEventListener('click', (event) => {
     event.preventDefault();
     document.getElementById('loading-card').style.display = 'block';
-    let cads = document.querySelectorAll('.card-stocks');
-    // TH
-    // console.log(cads)
-
 
     formattedStockTicker = event.currentTarget.querySelector('.card-title').textContent;
-    // console.log(formattedStockTicker)
-    // console.log(typeof formattedStockTicker)
-    // TH
-
     const symbols = availableStocks.map(item => item.symbol);
       if (symbols.includes(formattedStockTicker)) {
         
@@ -1221,14 +1505,14 @@ cards.forEach(card => {
         const heading = document.querySelector('.in-heading');
 
 
-    // Defina seu conteúdo de texto para o valor de pesquisa formatado
+    // Set its text content to the formatted search value
         heading.textContent = formattedStockTicker;
 
-
+      
         fetch(`https://api.oplab.com.br/v3/market/stocks/${formattedStockTicker}`, { headers })
         .then(response => response.json())
         .then(data => {
-          const name = data.name; // obetenha o campo de nome da resposta
+          const name = data.name; // get the name field from the response
           const sector = data.sector;
           const price = data.close;
           const variation = data.variation;
@@ -1238,13 +1522,11 @@ cards.forEach(card => {
           //const companySector = document.querySelector('.inv-email-address'); // get the p element
           //companySector.textContent = sector;
           const companyStockPrice = document.querySelector('.inv-title'); // get the p element
-
           companyStockPrice.textContent = price;
           const symbolsWithVol = []
           if (symbolsWithVol.includes(formattedStockTicker)) {
           const companyStockVolatility = document.querySelector('.principal-table-volatility'); // get the p element
-          const filteredArray = volInformation
-              console.log(filteredArray)
+          const filteredArray = volInformation 
           .filter(item => item.stock === formattedStockTicker)
           .map(item => {
             return {
@@ -1271,12 +1553,11 @@ cards.forEach(card => {
           var today = new Date();
 
 
-          // formatar a data e hora
+          // format the date and time to match the desired format
           var formattedDateTime = formatDateTime(today);
 
 
-          // definir a data e hora formatada como o conteúdo de texto do elemento
-
+          // set the formatted date and time as the text content of the element
           document.querySelector('.inv-date').textContent = formattedDateTime;
           document.querySelector('.inv-email-operation').textContent = optionStrategySelected;
 
@@ -1295,7 +1576,7 @@ cards.forEach(card => {
               parseFloat(record.strike) < actualStockPrice &&
               ((new Date(record.due_date) - Date.now()) / (1000 * 60 * 60 * 24)) > 25)
               .sort((a, b) => b.strike - a.strike);
-
+          
             const firstRecord = filteredData[0];
             const secondRecord = filteredData.find(record => parseFloat(record.strike) < firstRecord.strike * 0.93 && record.due_date === firstRecord.due_date);
           
@@ -1307,7 +1588,7 @@ cards.forEach(card => {
             result.forEach((record, index) => {
                 const action = (record.strike === maxStrike) ? "Sell" : "buy";
                 const badgeClass = (action === "Sell") ? "badge-danger" : "badge-success";
-          
+
                 const newRow = document.createElement("tr");
                 newRow.setAttribute("bid-ask", `${record.bid} ${record.ask}`);
                 newRow.innerHTML = `
@@ -1393,41 +1674,57 @@ cards.forEach(card => {
             })
             .catch(error => console.error(error));
 
-
+          // Fazer como esse modelo
           } else if (optionStrategySelected=="Dividendo Sintético"){
+            const div = document.getElementById('dividendo-sintetico')
+
             const tableBody = document.querySelector(".inv--product-table-section table tbody");
+            // verifica se ja tem alguma linha na tabela e remove
+            const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
+
             fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
             .then(response => response.json())
             .then(data => {
             stockOptionsChain = data;
+
+            // Lista com todas as DueDates
+            const uniqueDueDates = [...new Set(stockOptionsChain.map(option => option.due_date))];
+
             const filteredData = data.filter(record =>
               record.category === "PUT" &&
-              parseFloat(record.strike) < 0.88*actualStockPrice &&
-              ((new Date(record.due_date) - Date.now()) / (1000 * 60 * 60 * 24)) > 35
+              parseFloat(record.strike) < 0.94*actualStockPrice &&
+                record.due_date === uniqueDueDates[0]
             )
             .sort((a, b) => b.strike - a.strike)
             .slice(0, 1);
+
          
-          
-          
+
             filteredData.forEach((record, index) => {
-                const action = 'Sell';
-                const badgeClass = (action === "Sell") ? "badge-danger" : "badge-success";
-          
+                const action = 'Venda';
+                const badgeClass = (action === "Venda") ? "badge-danger" : "badge-success";
+
+                // Se o tipo for igual a PUT, adicione a imagem da bandeira europeia
+                const addEuropeanImage = (record.category === "PUT") ? `<img src="https://flagcdn.com/w20/eu.png" width="18" alt="EuropeanImage" style="border-radius: 2px; margin-bottom: 2px; margin-left: 5px; opacity: 0.8">` : ``;
+
                 const newRow = document.createElement("tr");
                 newRow.setAttribute("bid-ask", `${record.bid} ${record.ask}`);
                 newRow.innerHTML = `
-                    <td><span class="badge ${badgeClass}" style="cursor: pointer; width: 3.75rem; padding: 2px 3px; border-radius: 4px;">${action}</span></td>
-                    <td>${record.category}</td>
-                    <td class="text-end qty" style="cursor: pointer; width: 7rem;">1000</td>
-                    <td>${record.symbol} - ${record.strike.toFixed(2)}</td>
+                    <td><span id="copy-action-name" class="badge ${badgeClass}" style="background-color: #ff5a5a; font-size: .65rem; width: 3.15rem; padding: 1px 4px 0px; border-radius: 3px; pointer-events: none; margin-left: -2px; user-select: none;">${action}</span></td>
+                    <td id="copy-option-type" style="font-size: .75rem; padding-top: 15px;">${record.category + addEuropeanImage}</td>
+                    <td class="qty" style="font-size: .75rem; cursor: pointer; width: 7rem; padding-top: 15px;">1000</td>                
+                    <td id="copy-strike" style="font-size: .75rem; padding-top: 15px;">${record.symbol} - ${record.strike.toFixed(2)}</td>
                     <td>
-                      <select class="due-date-dropdown" onchange="handleDueDateDropdownChange(this)">
+                      <select id="copy-maturity" style="font-size: .75rem; padding-top: 15px; height: 22px; border: 1px solid #999; color: #8882a1; border-radius: 6px; padding: 0 8px" class="due-date-dropdown" onchange="handleDueDateDropdownChange(this)">
                         ${getDueDateOptions(record.due_date)}
-                      </select>
+                      </select> 
                     </td>
                     <td>
-                      <select class="strike-percentage-dropdown" onchange="handleStrikePercentageDropdownChange(this, ${record.strike.toFixed(2)}, actualStockPrice)">
+                      <select style="font-size: .75rem; padding-top: 15px; height: 22px; border: 1px solid #999; color: #8882a1; border-radius: 6px; padding: 0 8px" class="strike-percentage-dropdown" onchange="handleStrikePercentageDropdownChange(this, ${record.strike.toFixed(2)}, actualStockPrice)">
                         ${generateStrikePercentageOptions(record.strike.toFixed(2), actualStockPrice)}
                       </select>
                     </td>
@@ -1435,9 +1732,22 @@ cards.forEach(card => {
                     <td class="text-end price"style="display: none;">${(record.close).toFixed(2)}</td>
                     <!--<td class="text-center"><svg style="color: red;margin-left: 30px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>-->
                 `;
+
+
+              console.log(badgeClass)
+              console.log(action)
+              console.log(record.bid)
+              console.log(record.ask)
+                // Exibe o valor do strike do cenário de alta
+                const bullishResultElement = document.getElementById("strike-bullish-scenario");
+                bullishResultElement.textContent = `${record.strike.toFixed(2)}`;
+
+                // Exibe o valor do strike do cenário parcial
+                const partialResultElement = document.getElementById("partial-scenario");
+                partialResultElement.textContent = `${(record.strike - 0.01).toFixed(2)}`;
+
                 tableBody.appendChild(newRow);
 
-                
             });
           
           
@@ -1448,7 +1758,16 @@ cards.forEach(card => {
 
 
           } else if (optionStrategySelected=="Fence"){
+
+
             const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+            // verifica se ja tem alguma linha na tabela e remove
+            const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
             fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
             .then(response => response.json())
             .then(data => {
@@ -1538,7 +1857,14 @@ cards.forEach(card => {
             })
             .catch(error => console.error(error));
           } else if (optionStrategySelected=="Financiamento"){
+
             const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+             const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
             fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
             .then(response => response.json())
             .then(data => {
@@ -1672,7 +1998,7 @@ cards.forEach(card => {
                 tableBody.appendChild(newRow);
             });
           
-
+          
             })
             .catch(error => console.error(error));
 
@@ -1922,6 +2248,14 @@ cards.forEach(card => {
         })
         .catch(error => console.error(error));
 
+        // const div = document.getElementById('dividendo-sintetico')
+        // const financ = document.getElementById('financiamento')
+        // const fence = document.getElementById('fence')
+        // const customized = document.getElementById('customized')
+        // financ.style.display = 'block'
+        // div.style.display = 'block'
+        // fence.style.display = 'block'
+        // customized.style.display = 'block'
 
         function fetchData() {
       
@@ -1974,7 +2308,7 @@ cards.forEach(card => {
             
               const companyStockDailyVariation = document.querySelector('.inv-number'); // get the p element
               if (variation>=0){
-                companyStockDailyVariation.style.color = 'green';
+                companyStockDailyVariation.style.color = '#00ab55';
               } else {
                 companyStockDailyVariation.style.color = 'red';
               }
@@ -2345,22 +2679,22 @@ function addNewPut() {
 
 function addNewCall() {
     const calls = stockOptionsChain.filter(record => record.category === "CALL");
-
-
+  
+  
     const existingSymbols = Array.from(tableBody.querySelectorAll("td:nth-child(4)")).map(td => td.textContent.split('-')[0].replace(' ', ''));
-
+    
     // Filter for the closest value of actualStockPrice and symbol not already present
     const filteredCalls = calls.filter(call =>
       !existingSymbols.includes(call.symbol) &&
-      parseFloat(call.strike) < actualStockPrice
+      parseFloat(call.strike) < actualStockPrice 
     ).sort((a, b) => b.strike - a.strike)
     .slice(0, 1);
-
+  
     if (filteredCalls.length === 0) {
       alert("No suitable call options found.");
       return;
     }
-
+  
     // Create a new row and populate it with data from the filtered call options
     const newRow = document.createElement("tr");
     const actionNew = 'Buy';
@@ -2392,7 +2726,7 @@ function addNewCall() {
     </svg>
   </td>
 `;
-
+  
     tableBodyCallInsert.appendChild(newRow);
   }
 
@@ -2418,7 +2752,7 @@ function addNewCall() {
 function getDueDateOptions(selectedDueDate) {
   // Extract unique due_date values from the stockOptionsChain array
   const uniqueDueDates = [...new Set(stockOptionsChain.map(option => option.due_date))];
-  
+
   // Generate the option elements for the dropdown, and set the selected option
   const optionElements = uniqueDueDates.map(dueDate => {
     if (dueDate === selectedDueDate) {
@@ -2481,17 +2815,21 @@ function handleDueDateDropdownChange(selectElement) {
   newOptions.forEach(record => {
     const percentage = record.strike / actualStockPrice * 100;
     const percentageDiff = Math.abs(percentage - selectedStrikePercentage);
-    
+
     if (percentageDiff < closestPercentageDiff) {
       closestPercentageDiff = percentageDiff;
       closestRecord = record;
     }
   });
-  
+
   // Set the text content of the 3rd column with the closest record information
  
   row.cells[3].textContent = `${closestRecord.symbol} - ${closestRecord.strike.toFixed(2)}`;
-  
+
+  // Atualize a <p class="strike-bullish-scenario"> com base no valor do strike
+  const newValueStrikeScenarios = `${closestRecord.strike.toFixed(2)}`;
+  updateValueStrikeScenarios(newValueStrikeScenarios);
+
 }
 
 
@@ -2540,10 +2878,10 @@ function switchStock(){
       const price = data.close;
       const variation = data.variation;
       const volatility = data.iv_current;
-      const companyName = document.querySelector('.inv-street-addr'); // get the p element
-      companyName.textContent = name;
-      const companySector = document.querySelector('.inv-email-address'); // get the p element
-      companySector.textContent = sector;
+      // const companyName = document.querySelector('.inv-street-addr'); // get the p element
+      // companyName.textContent = name;
+      // const companySector = document.querySelector('.inv-email-address'); // get the p element
+      // companySector.textContent = sector;
       const companyStockPrice = document.querySelector('.inv-title'); // get the p element
       companyStockPrice.textContent = price;
       const companyStockVolatility = document.querySelector('.principal-table-volatility'); // get the p element
@@ -2681,21 +3019,35 @@ function switchStock(){
 
 
       } else if (optionStrategySelected=="Dividendo Sintético"){
+        // esconde o card recomendado da propria estrutura
+        const dividendo = document.getElementById('dividendo-sintetico')
+        dividendo.style.display = 'none'
+
         const tableBody = document.querySelector(".inv--product-table-section table tbody");
+        // verifica se ja tem alguma linha na tabela e remove
+            const existingRows = tableBody.querySelectorAll("tr");
+            for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
         fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
         .then(response => response.json())
         .then(data => {
         stockOptionsChain = data;
+
+        // Lista com todas as DueDates
+        const uniqueDueDates = [...new Set(stockOptionsChain.map(option => option.due_date))];
+
         const filteredData = data.filter(record =>
           record.category === "PUT" &&
-          parseFloat(record.strike) < 0.88*actualStockPrice &&
-          ((new Date(record.due_date) - Date.now()) / (1000 * 60 * 60 * 24)) > 35
+          parseFloat(record.strike) < 0.95*actualStockPrice &&
+          record.due_date === uniqueDueDates[0]
         )
         .sort((a, b) => b.strike - a.strike)
         .slice(0, 1);
+
       
-      
-      
+
         filteredData.forEach((record, index) => {
             const action = 'Sell';
             const badgeClass = (action === "Sell") ? "badge-danger" : "badge-success";
@@ -2732,7 +3084,18 @@ function switchStock(){
 
 
       } else if (optionStrategySelected=="Fence"){
+
+        const fence = document.getElementById('fence')
+        fence.style.display = 'none'
+
         const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+        // verifica se ja tem alguma linha na tabela e remove
+        const existingRows = tableBody.querySelectorAll("tr");
+        for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
+
         fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
         .then(response => response.json())
         .then(data => {
@@ -2822,7 +3185,17 @@ function switchStock(){
         })
         .catch(error => console.error(error));
       } else if (optionStrategySelected=="Financiamento"){
+
+        const financ = document.getElementById('financiamento')
+        financ.style.display = 'none'
+
         const tableBody = document.querySelector(".inv--product-table-section table tbody");
+
+
+        const existingRows = tableBody.querySelectorAll("tr");
+        for (let i = 0; i < existingRows.length; i++) {
+              tableBody.removeChild(existingRows[i]);
+            }
         fetch(`https://api.oplab.com.br/v3/market/options/${formattedStockTicker}`, { headers })
         .then(response => response.json())
         .then(data => {
@@ -3359,13 +3732,13 @@ function generateStrikePercentageOptions(strikeValue, actualStockPrice) {
   
   // Calculate the closest percentage option
   const closestOption = Math.round(ratio * 100 / interval) * interval;
-  
+
   // Generate the options
   let optionsHtml = '';
   for (let percentage = minPercentage; percentage <= maxPercentage; percentage += interval) {
     optionsHtml += `<option value="${percentage}" ${percentage === closestOption ? 'selected' : ''}>${percentage}%</option>`;
   }
-  
+
   return optionsHtml;
 }
 
@@ -3401,8 +3774,21 @@ function handleStrikePercentageDropdownChange(selectElement, strikeValue, actual
   // Set the text content of the 3rd column with the closest record information
  
   row.cells[3].textContent = `${closestRecord.symbol} - ${closestRecord.strike.toFixed(2)}`;
+
+  // Atualize a <p class="strike-bullish-scenario"> com base no valor do strike
+  const newValueStrikeScenarios = `${closestRecord.strike.toFixed(2)}`;
+  updateValueStrikeScenarios(newValueStrikeScenarios);
+
 }
 
+// Função para atualizar dinamicamente os valores do strike nos cenários
+function updateValueStrikeScenarios(novoValor) {
+  const valueStrikeScenariosBullishElement = document.getElementById("strike-bullish-scenario");
+  valueStrikeScenariosBullishElement.textContent = novoValor;
+
+  const valueStrikeScenariosPartialElement = document.getElementById("partial-scenario");
+  valueStrikeScenariosPartialElement.textContent = (novoValor - 0.01).toFixed(2);
+}
 
 document.getElementById("view-structure-board").addEventListener("click", function() {
   var quotePresentation = document.getElementById("quote_presentation");
@@ -3442,7 +3828,7 @@ document.getElementById("view-structure-board").addEventListener("click", functi
     console.log(price, strike)
     // Format the date as "dd/mm/yyyy"
     const formattedDate = `${dayDatetime.toString().padStart(2, '0')}/${monthDatetime.toString().padStart(2, '0')}/${yearDatetime}`;
-    document.getElementById("vencimento-estrategia").textContent = formattedDate;      
+    document.getElementById("vencimento-estrategia").textContent = formattedDate;
     document.getElementById("strategy-structure-description").textContent = 'Otimização de Carteira | Proteção Parcial';
     document.getElementById("strategy-max-profit").textContent = ((price/(strike-price))* 100).toFixed(2).toString() + '%';
     document.getElementById("risk-scenario-strategy").textContent = `${formattedStockTicker} abaixo de ${strike} fica comprado na ação a ${(strike-price).toFixed(2)} e acompanha posterior variação do ativo.`;
